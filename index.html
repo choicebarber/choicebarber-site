@@ -14,33 +14,55 @@
     }
     h1 {
       color: #C8102E;
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+    }
+    button {
+      background: #C8102E;
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      margin: 0.5rem;
+    }
+    button:hover {
+      opacity: 0.9;
     }
   </style>
 </head>
 <body>
+  <!-- Logo -->
   <div style="text-align:center; margin-bottom:2rem;">
-  <img src="logo.png" alt="Choice Barber" style="max-width:200px; height:auto;" />
-</div>
-<h1>Choice Barber</h1>
-  <p>Your go-to job board for barbers and barbershops.</p>
-  <h2>Choose Your Plan</h2>
-<div style="display:grid;gap:1rem;justify-content:center;">
-  <a href="https://buy.stripe.com/bIYcNxciOc59f7ifZ0" target="_blank">
-    <button>Start 30 Day Free Trial</button>
-  </a>
-  <a href="https://buy.stripe.com/bIYcNxciOc59f7ifZ0" target="_blank">
-    <button>$24.95 / month</button>
-  </a>
-  <a href="https://buy.stripe.com/5kA28TeqW5GL8IU5kl" target="_blank">
-    <button>$149.95 / year (Save 50%)</button>
-  </a>
-</div>
+    <img src="logo.png" alt="Choice Barber" style="max-width:200px; height:auto;" />
+  </div>
 
+  <!-- Main headline -->
+  <h1>Choice Barber</h1>
+  <p>Your go-to job board for barbers and barbershops.</p>
+
+  <!-- Pricing -->
+  <h2>Choose Your Plan</h2>
+  <div style="display:grid; gap:1rem; justify-content:center;">
+    <a href="https://buy.stripe.com/bIYcNxciOc59f7ifZ0" target="_blank">
+      <button>Start 30 Day Free Trial</button>
+    </a>
+    <a href="https://buy.stripe.com/bIYcNxciOc59f7ifZ0" target="_blank">
+      <button>$24.95 / month</button>
+    </a>
+    <a href="https://buy.stripe.com/5kA28TeqW5GL8IU5kl" target="_blank">
+      <button>$149.95 / year (Save 50%)</button>
+    </a>
+  </div>
+
+  <!-- Navigation buttons -->
+  <p style="text-align:center; margin-top:2rem;">
+    <a href="post-a-job.html"><button>Post a Job</button></a>
+  </p>
+  <p style="text-align:center; margin-top:2rem;">
+    <a href="view-jobs.html"><button>View Current Job Listings</button></a>
+  </p>
 </body>
 </html>
-<p style="text-align:center; margin-top:2rem;">
-  <a href="post-a-job.html"><button>Post a Job</button></a>
-</p>
-<p style="text-align:center; margin-top:2rem;">
-  <a href="view-jobs.html"><button>View Current Job Listings</button></a>
-</p>
+
