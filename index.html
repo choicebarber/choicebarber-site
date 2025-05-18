@@ -10,59 +10,67 @@
       font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
-      background: #f9f9f9;
+      background: #ffffff;
       color: #111;
     }
     .hero {
       position: relative;
       background: url('barbershop-clean-desktop.jpg') center/cover no-repeat;
-      height: 80vh;
+      height: 75vh;
       min-height: 400px;
       max-height: 600px;
+      margin: 0 auto;
+      padding: 0 1rem;
     }
     @media (max-width: 768px) {
       .hero {
-        height: 40vh;
+        height: 45vh;
         background-position: top;
       }
     }
     .pricing {
-      padding: 3rem 1rem;
+      padding: 4rem 1.5rem;
       text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .pricing h2 {
-      font-size: 2rem;
+      font-size: 2.25rem;
       margin-bottom: 2rem;
+      font-weight: 700;
     }
     .plans {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
     }
     .plan {
       background: #fff;
-      border-radius: 10px;
-      padding: 2rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      border-radius: 14px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+    .plan:hover {
+      transform: translateY(-4px);
     }
     .plan h3 {
       margin-top: 0;
       color: #C8102E;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
     }
     .plan p {
-      font-size: 0.95rem;
-      color: #555;
-      margin: 0.5rem 0;
+      font-size: 1rem;
+      color: #444;
+      margin: 0.5rem 0 1rem;
     }
     .plan .price {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-weight: bold;
       margin: 1rem 0;
       color: #111;
@@ -70,13 +78,13 @@
     .plan button {
       background: #003F87;
       color: white;
-      padding: 0.6rem 1rem;
+      padding: 0.75rem 1.5rem;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s ease;
     }
     .plan button:hover {
       background: #002a5c;
