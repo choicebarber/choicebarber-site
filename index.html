@@ -4,65 +4,152 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Choice Barber</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #111;
+    }
+    .hero {
+      background: url('your-background-image.jpg') center/cover no-repeat;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
       padding: 2rem;
-      background: #ffffff;
-      color: #003F87;
     }
-    h1 {
-      color: #C8102E;
-      margin-bottom: 0.5rem;
-      font-size: 2.5rem;
+    .hero h1 {
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
     }
-    button {
+    .hero p {
+      font-size: 1.2rem;
+      color: #eee;
+      max-width: 600px;
+      margin: 1rem 0 2rem;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .cta-buttons a {
+      text-decoration: none;
       background: #C8102E;
-      color: #ffffff;
-      border: none;
+      color: white;
       padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 0.25rem;
-      cursor: pointer;
-      margin: 0.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.3s ease;
     }
-    button:hover {
-      opacity: 0.9;
+    .cta-buttons a:hover {
+      background: #a30c23;
+    }
+    .pricing {
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+    .pricing h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .plan {
+      background: #fff;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .plan h3 {
+      margin-top: 0;
+      color: #C8102E;
+    }
+    .plan p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+    .plan .price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 1rem 0;
+    }
+    .plan button {
+      background: #003F87;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .plan button:hover {
+      background: #002a5c;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #f1f1f1;
+      font-size: 0.85rem;
     }
   </style>
 </head>
 <body>
-  <!-- Logo -->
-  <div style="text-align:center; margin-bottom:2rem;">
-    <img src="choicebarber-logo.png" alt="Choice Barber" style="max-width:200px; height:auto;" />
-  </div>
+  <section class="hero">
+    <h1>Find Barbers. Fill Chairs. Fast.</h1>
+    <p>Your go-to job board built specifically for barbershops. Post jobs, find barbers, and grow your team.</p>
+    <div class="cta-buttons">
+      <a href="#">Try 14 Days Free</a>
+      <a href="#">Post a Job</a>
+    </div>
+  </section>
 
-  <!-- Main headline -->
-  <h1>Choice Barber</h1>
-  <p>Your go-to job board for barbers and barbershops.</p>
+  <section class="pricing">
+    <h2>Simple, Transparent Pricing</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>Free Trial</h3>
+        <p>14 days · 1 job post · No credit card required</p>
+        <div class="price">$0</div>
+        <button>Start Free Trial</button>
+      </div>
+      <div class="plan">
+        <h3>One-Time Post</h3>
+        <p>Post 1 job for 30 days</p>
+        <div class="price">$49.95</div>
+        <button>Buy Now</button>
+      </div>
+      <div class="plan">
+        <h3>Monthly Plan</h3>
+        <p>Unlimited listings · Cancel anytime</p>
+        <div class="price">$39.95/mo</div>
+        <button>Subscribe</button>
+      </div>
+      <div class="plan">
+        <h3>Annual Plan</h3>
+        <p>Unlimited listings · Save 58%</p>
+        <div class="price">$199.95/yr</div>
+        <button>Go Annual</button>
+      </div>
+    </div>
+  </section>
 
-  <!-- Pricing -->
-  <h2>Choose Your Plan</h2>
-  <div style="display:grid; gap:1rem; justify-content:center;">
-    <a href="https://buy.stripe.com/bIYcNxciOc59f7ifZ0" target="_blank">
-      <button>Start 30 Day Free Trial</button>
-    </a>
-    <a href="https://buy.stripe.com/bIYcNxciOc59f7ifZ0" target="_blank">
-      <button>$24.95 / month</button>
-    </a>
-    <a href="https://buy.stripe.com/5kA28TeqW5GL8IU5kl" target="_blank">
-      <button>$149.95 / year (Save 50%)</button>
-    </a>
-  </div>
-
-  <!-- Navigation buttons -->
-  <p style="text-align:center; margin-top:2rem;">
-    <a href="post-a-job.html"><button>Post a Job</button></a>
-  </p>
-  <p style="text-align:center; margin-top:2rem;">
-    <a href="view-jobs.html"><button>View Current Job Listings</button></a>
-  </p>
+  <footer>
+    &copy; 2025 Choice Barber. All rights reserved.
+  </footer>
 </body>
 </html>
 
