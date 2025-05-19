@@ -21,29 +21,71 @@
       max-height: 600px;
       margin: 0 auto;
       padding: 0 1rem;
+      overflow: hidden;
+    }
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+    }
+    .hero-content .cta-hero {
+      background: #C8102E;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.25rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .hero-content .cta-hero:hover {
+      background: #a30c23;
     }
     @media (max-width: 768px) {
       .hero {
         height: 45vh;
         background-position: top;
       }
+      .hero-content .cta-hero {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+      }
     }
-    .pricing {
-      padding: 4rem 1.5rem;
-      text-align: center;
+    .featured-jobs, .pricing, .cta-final, .faq {
       max-width: 1200px;
       margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    .featured-jobs {
+      background: #f9f9f9;
+      text-align: center;
+    }
+    .featured-jobs h2 {
+      font-size: 2rem;
+      color: #003F87;
+      margin-bottom: 1rem;
+    }
+    .featured-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .pricing {
+      text-align: center;
     }
     .pricing h2 {
       font-size: 2.25rem;
       margin-bottom: 2rem;
       font-weight: 700;
+      color: #003F87;
     }
     .plans {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
-      margin-top: 2rem;
     }
     .plan {
       background: #fff;
@@ -91,7 +133,6 @@
     }
     .cta-final {
       background: #f9f9f9;
-      padding: 3rem 1rem;
       text-align: center;
     }
     .cta-final h2 {
@@ -114,6 +155,23 @@
     .cta-final button:hover {
       background: #a30c23;
     }
+    .faq {
+      background: #f9f9f9;
+    }
+    .faq h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: #003F87;
+      margin-bottom: 1rem;
+    }
+    .faq div {
+      margin-bottom: 1rem;
+    }
+    .faq strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
     footer {
       text-align: center;
       padding: 2rem 1rem;
@@ -123,12 +181,16 @@
   </style>
 </head>
 <body>
-  <section class="hero"></section>
+  <section class="hero">
+    <div class="hero-content">
+      <button class="cta-hero" onclick="location.href='post-a-job.html'">Try 14-Day Free Trial<br><small>No credit card required</small></button>
+    </div>
+  </section>
 
   <!-- Featured Jobs Section -->
-  <section class="featured-jobs" style="padding:3rem 1rem; background:#f9f9f9; text-align:center;">
-    <h2 style="font-size:2rem; color:#003F87; margin-bottom:1rem;">Featured Jobs</h2>
-    <div class="featured-container" style="max-width:1000px; margin:0 auto;">
+  <section class="featured-jobs">
+    <h2>Featured Jobs</h2>
+    <div class="featured-container">
       <!-- Replace the src below with your Airtable "Featured Jobs" view iframe -->
       <iframe class="airtable-embed" src="https://airtable.com/embed/FEATURED_VIEW_ID?backgroundColor=blue" frameborder="0" onmousewheel="" width="100%" height="400"></iframe>
     </div>
@@ -173,22 +235,22 @@
   </section>
 
   <!-- FAQ Section -->
-  <section class="faq" style="padding:3rem 1rem; background:#f9f9f9;">
-    <div style="max-width:800px; margin:0 auto; text-align:left;">
-      <h2 style="text-align:center; font-size:2rem; color:#003F87; margin-bottom:1.5rem;">Frequently Asked Questions</h2>
-      <div style="margin-bottom:1rem;">
+  <section class="faq">
+    <div>
+      <h2>Frequently Asked Questions</h2>
+      <div>
         <strong>Q: Do I need a credit card for the free trial?</strong>
         <p>A: No! You can try Choice Barber free for 14 days with no credit card required.</p>
       </div>
-      <div style="margin-bottom:1rem;">
+      <div>
         <strong>Q: Can I cancel anytime?</strong>
         <p>A: Absolutely. Monthly and annual subscriptions auto-renew, but you can cancel at any time before renewal.</p>
       </div>
-      <div style="margin-bottom:1rem;">
+      <div>
         <strong>Q: How long do job posts stay active?</strong>
         <p>A: One-time posts stay live for 30 days. Monthly and annual plan posts remain active as long as your subscription is active.</p>
       </div>
-      <div style="margin-bottom:1rem;">
+      <div>
         <strong>Q: How do I contact support?</strong>
         <p>A: Email us anytime at <a href="mailto:support@choicebarber.com">support@choicebarber.com</a>.</p>
       </div>
