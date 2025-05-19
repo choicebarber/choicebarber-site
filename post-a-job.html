@@ -103,6 +103,14 @@
       transform: scale(1.02);
     }
 
+    /* MESSAGE */
+    .submission-message {
+      margin-top: 1rem;
+      font-size: 1rem;
+      text-align: center;
+      color: #003F87;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 600px) {
       .hero-content h1 { font-size: 2rem; }
@@ -120,7 +128,7 @@
 
   <!-- FORM -->
   <section class="form-section container">
-    <form class="job-form-container">
+    <form id="jobForm" class="job-form-container">
       <div class="form-group">
         <label for="title">Job Title</label>
         <input id="title" name="title" type="text" placeholder="e.g. Senior Barber at Downtown Shop" required>
@@ -142,10 +150,11 @@
         <input id="contact" name="contact" type="email" placeholder="your.email@example.com" required>
       </div>
       <button type="submit" class="btn-primary">Post Job</button>
+      <div id="message" class="submission-message"></div>
     </form>
   </section>
-</body>
-   <!-- SCRIPT: submit to Airtable -->
+
+  <!-- SCRIPT: submit to Airtable -->
   <script>
     const form = document.getElementById('jobForm');
     const messageDiv = document.getElementById('message');
@@ -153,7 +162,7 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // 1) Gather the form values
+      // Gather form values
       const data = {
         fields: {
           'Title': form.title.value,
@@ -165,10 +174,8 @@
       };
 
       try {
-        // 2) Send to Airtable
         const resp = await fetch(
-          'https://api.airtable.com/v0/appfANcZgwzZrJlQ4/shrOYf97yOoOQMpte/Post%20a%20Job',
-          {
+          'https://api.airtable.com/v0/appfANcZgwzZrJlQ4/Post%20a%20Job', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -178,7 +185,6 @@
           }
         );
 
-        // 3) Handle the response
         if (resp.ok) {
           messageDiv.textContent = '✅ Your job has been posted!';
           form.reset();
@@ -191,5 +197,5 @@
       }
     });
   </script>
- 
+</body>
 </html>
