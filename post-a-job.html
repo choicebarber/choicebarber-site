@@ -15,37 +15,36 @@
       color: #111;
     }
     .container {
-      max-width: 1200px;
+      max-width: 800px;
       margin: 0 auto;
       padding: 0 1rem;
     }
 
     /* HERO SECTION */
     .hero {
-      position: relative;
       background: url('barbershop-clean-background.jpg') center/cover no-repeat;
-      height: 50vh;
+      height: 40vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
     }
     .hero-content {
-      background: rgba(255,255,255,0.95);
+      background: rgba(255,255,255,0.9);
       padding: 2rem;
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      max-width: 600px;
       width: 90%;
+      max-width: 600px;
     }
     .hero-content h1 {
-      margin: 0 0 1rem;
-      font-size: 2.75rem;
+      margin: 0;
+      font-size: 2.5rem;
       color: #003F87;
     }
     .hero-content p {
-      margin: 0;
-      font-size: 1.125rem;
+      margin-top: 0.5rem;
+      font-size: 1rem;
       color: #444;
     }
 
@@ -58,30 +57,55 @@
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
       padding: 2rem;
-      margin: 0 auto;
-      max-width: 800px;
-    }
-    .job-form-container iframe {
       width: 100%;
-      min-height: 800px;
-      border: none;
+    }
+    .job-form-container .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .job-form-container label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #003F87;
+    }
+    .job-form-container input,
+    .job-form-container textarea,
+    .job-form-container select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .job-form-container input:focus,
+    .job-form-container textarea:focus,
+    .job-form-container select:focus {
+      border-color: #003F87;
+      box-shadow: 0 0 0 3px rgba(0,63,135,0.2);
+      outline: none;
     }
 
-    /* BUTTON STYLES (if needed for next steps) */
-    .btn-secondary {
-      display: inline-block;
-      margin-top: 1rem;
-      background: transparent;
-      color: #003F87;
-      border: 2px solid #003F87;
-      padding: 0.65rem 1.8rem;
+    /* BUTTON */
+    .btn-primary {
+      background: #C8102E;
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border: none;
       border-radius: 6px;
       font-weight: 600;
+      font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.2s;
     }
-    .btn-secondary:hover {
-      background: rgba(0,63,135,0.1);
+    .btn-primary:hover {
+      background: #a30c23;
+      transform: scale(1.02);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .hero-content h1 { font-size: 2rem; }
     }
   </style>
 </head>
@@ -90,15 +114,35 @@
   <section class="hero">
     <div class="hero-content container">
       <h1>Post a Barber Job</h1>
-      <p>Connect with skilled barbers quickly by posting your job in seconds.</p>
+      <p>Fill out the form below to connect with qualified barbers in your area.</p>
     </div>
   </section>
 
-  <!-- FORM EMBED -->
+  <!-- FORM -->
   <section class="form-section container">
-    <div class="job-form-container">
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfP_wPuichez_-BATuCNXMy8ixrqoUvwtJMMVTLhURp5sfojA/viewform?embedded=true">Loading…</iframe>
-    </div>
+    <form class="job-form-container">
+      <div class="form-group">
+        <label for="title">Job Title</label>
+        <input id="title" name="title" type="text" placeholder="e.g. Senior Barber at Downtown Shop" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Job Description</label>
+        <textarea id="description" name="description" rows="4" placeholder="Describe responsibilities and requirements" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input id="location" name="location" type="text" placeholder="City, State" required>
+      </div>
+      <div class="form-group">
+        <label for="salary">Compensation</label>
+        <input id="salary" name="salary" type="text" placeholder="e.g. $20/hr or Commission-based" required>
+      </div>
+      <div class="form-group">
+        <label for="contact">Contact Email</label>
+        <input id="contact" name="contact" type="email" placeholder="your.email@example.com" required>
+      </div>
+      <button type="submit" class="btn-primary">Post Job</button>
+    </form>
   </section>
 </body>
 </html>
