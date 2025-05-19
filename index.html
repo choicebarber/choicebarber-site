@@ -85,7 +85,7 @@
       }
     }
 
-    /* OTHER SECTIONS */
+    /* SECTION SPACING */
     section { padding: 3rem 0; }
 
     /* JOB LISTINGS SECTION */
@@ -166,20 +166,20 @@
     }
     .plan button:hover { background: #002a5c; }
 
-    /* FAQ & FOOTER */
+    /* FAQ SECTION */
     .faq h2 {
       color: #003F87;
       text-align: center;
       margin-bottom: 1rem;
     }
-    .faq div {
-      margin-bottom: 1rem;
-    }
+    .faq div { margin-bottom: 1rem; }
     .faq strong {
       display: block;
       font-weight: 600;
       margin-bottom: 0.25rem;
     }
+
+    /* FOOTER */
     footer {
       background: #f1f1f1;
       padding: 2rem 0;
@@ -189,6 +189,81 @@
   </style>
 </head>
 <body>
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-content container">
-      <h1>Connecting Skilled Barbers with Busy Shops—Fast & Simple</n
+      <h1>Connecting Skilled Barbers with Busy Shops—Fast & Simple</h1>
+      <p>Barbers: Discover exclusive gigs and apply in seconds.</p>
+      <p>Shop Owners: Grow your team with vetted barbers—start a 14-day free trial, no credit card required.</p>
+      <button class="cta-hero" onclick="location.href='post-a-job.html'">Try Free Trial</button>
+    </div>
+  </section>
+
+  <!-- JOB LISTINGS -->
+  <section class="job-listings container">
+    <h2>Job Listings</h2>
+    <div class="job-listings-container">
+      <iframe class="airtable-embed" src="https://airtable.com/embed/PUBLIC_GALLERY_VIEW_ID?backgroundColor=blue" width="100%" height="400"></iframe>
+    </div>
+    <div class="view-all"><button>View All Jobs</button></div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing container">
+    <h2>Flexible Pricing for Fast-Growing Shops</h2>
+    <p class="pricing-subtitle">Pick a plan that fits your team and budget, with zero hidden fees.</p>
+    <div class="plans">
+      <div class="plan">
+        <h3>Free Trial</h3>
+        <p>14 days · 1 job post · No credit card required</p>
+        <div class="price">$0</div>
+        <button>Start Free Trial</button>
+      </div>
+      <div class="plan">
+        <h3>One-Time Post</h3>
+        <p>Post 1 job for 30 days</p>
+        <div class="price">$49.95</div>
+        <button>Buy Now</button>
+      </div>
+      <div class="plan">
+        <h3>Monthly Plan</h3>
+        <p>Unlimited listings · Cancel anytime</p>
+        <div class="price">$39.95/mo</div>
+        <button>Subscribe</button>
+      </div>
+      <div class="plan">
+        <h3>Annual Plan</h3>
+        <p>Unlimited listings · Save 58%</p>
+        <div class="price">$199.95/yr</div>
+        <button>Go Annual</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq container">
+    <h2>Frequently Asked Questions</h2>
+    <div>
+      <strong>Q: Do I need a credit card for the free trial?</strong>
+      <p>No—you can try Choice Barber free for 14 days with no credit card required.</p>
+    </div>
+    <div>
+      <strong>Q: Can I cancel anytime?</strong>
+      <p>Yes—monthly and annual subscriptions auto-renew, but you can cancel at any time before renewal.</p>
+    </div>
+    <div>
+      <strong>Q: How long do job posts stay active?</strong>
+      <p>One-time posts stay live for 30 days. Subscribed posts remain active while your plan is active.</p>
+    </div>
+    <div>
+      <strong>Q: How do I contact support?</strong>
+      <p>Email us anytime at <a href="mailto:support@choicebarber.com">support@choicebarber.com</a>.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Choice Barber. All rights reserved.
+  </footer>
+</body>
+</html>
