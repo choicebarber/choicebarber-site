@@ -64,9 +64,7 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-    .cta-hero:hover {
-      background: #a30c23;
-    }
+    .cta-hero:hover { background: #a30c23; }
 
     /* RESPONSIVE TWEAKS */
     @media (max-width: 768px) {
@@ -74,113 +72,39 @@
       .hero-content { padding: 1.5rem; }
       .hero-content h1 { font-size: 2rem; }
       .hero-content p { font-size: 1rem; }
-      .cta-hero {
-        width: 100%;
-        max-width: 280px;
-        margin: 1rem auto 0;
-      }
+      .cta-hero { width: 100%; max-width: 280px; margin: 1rem auto 0; }
     }
 
     /* OTHER SECTIONS */
     section { padding: 3rem 0; }
 
-    .job-listings {
-      background: #fff;
-    }
-    .job-listings h2 {
-      margin-bottom: 1.5rem;
-      color: #003F87;
-      text-align: center;
-    }
-    .job-listings-container {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .job-listings iframe {
-      border: none;
-      width: 100%;
-      min-height: 400px;
-    }
+    .job-listings { background: #fff; }
+    .job-listings h2 { margin-bottom: 1.5rem; color: #003F87; text-align: center; }
+    .job-listings-container { box-shadow: 0 4px 20px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
+    .job-listings iframe { border: none; width: 100%; min-height: 400px; }
     .view-all { text-align: center; margin-top: 1rem; }
-    .view-all button {
-      background: #003F87;
-      color: #fff;
-      padding: 0.6rem 1.2rem;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+    .view-all button { background: #003F87; color: #fff; padding: 0.6rem 1.2rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
     .view-all button:hover { background: #002a5c; }
 
-    .pricing h2 {
-      color: #003F87;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .plans {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-    }
-    .plan {
-      background: #fff;
-      border-radius: 10px;
-      padding: 2rem;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+    .pricing h2 { color: #003F87; text-align: center; margin-bottom: 2rem; }
+    .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+    .plan { background: #fff; border-radius: 10px; padding: 2rem; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
     .plan h3 { color: #C8102E; margin-bottom: 0.5rem; }
     .plan p { color: #555; margin-bottom: 1rem; }
     .plan .price { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
-    .plan button {
-      background: #003F87;
-      color: #fff;
-      padding: 0.6rem 1.2rem;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+    .plan button { background: #003F87; color: #fff; padding: 0.6rem 1.2rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
     .plan button:hover { background: #002a5c; }
 
-    .cta-final {
-      text-align: center;
-      background: #f9f9f9;
-    }
+    .cta-final { text-align: center; background: #f9f9f9; }
     .cta-final h2 { color: #003F87; margin-bottom: 1rem; }
-    .cta-final button {
-      background: #C8102E;
-      color: #fff;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+    .cta-final button { background: #C8102E; color: #fff; padding: 0.75rem 1.5rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
     .cta-final button:hover { background: #a30c23; }
 
-    .faq h2 {
-      color: #003F87;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
+    .faq h2 { color: #003F87; text-align: center; margin-bottom: 1rem; }
     .faq div { margin-bottom: 1rem; }
     .faq strong { display: block; font-weight: 600; margin-bottom: 0.25rem; }
 
-    footer {
-      background: #f1f1f1;
-      padding: 2rem 0;
-      text-align: center;
-      font-size: 0.85rem;
-    }
+    footer { background: #f1f1f1; padding: 2rem 0; text-align: center; font-size: 0.85rem; }
   </style>
 </head>
 <body>
@@ -198,6 +122,12 @@
       <iframe class="airtable-embed" src="https://airtable.com/embed/PUBLIC_GALLERY_VIEW_ID?backgroundColor=blue" width="100%" height="400"></iframe>
     </div>
     <div class="view-all"><a href="view-jobs.html"><button>View All Jobs</button></a></div>
+  </section>
+
+  <!-- Moved CTA-FINAL immediately after Job Listings -->
+  <section class="cta-final container">
+    <h2>Ready to Fill Your Chair?</h2>
+    <button onclick="location.href='post-a-job.html'">Start Posting Jobs Today</button>
   </section>
 
   <section class="pricing container">
@@ -228,11 +158,6 @@
         <button>Go Annual</button>
       </div>
     </div>
-  </section>
-
-  <section class="cta-final container">
-    <h2>Ready to Fill Your Chair?</h2>
-    <button onclick="location.href='post-a-job.html'">Start Posting Jobs Today</button>
   </section>
 
   <section class="faq container">
