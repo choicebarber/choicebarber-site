@@ -10,201 +10,167 @@
       font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
-      background: #ffffff;
+      background: #f5f5f5;
       color: #111;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
     }
     .hero {
       position: relative;
       background: url('barbershop-clean-desktop.jpg') center/cover no-repeat;
       height: 75vh;
       min-height: 400px;
-      max-height: 600px;
-      margin: 0 auto;
-      padding: 0 1rem;
-      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .hero-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.85);
+      padding: 2rem 3rem;
       text-align: center;
-      z-index: 2;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
-    .hero-content .cta-hero {
+    .cta-hero {
       background: #C8102E;
       color: #fff;
       padding: 0.75rem 1.5rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       font-weight: 600;
       font-size: 1.25rem;
       cursor: pointer;
-      transition: background 0.3s ease;
+      margin-top: 1rem;
+      transition: background 0.3s;
     }
-    .hero-content .cta-hero small {
-      display: block;
-      font-size: 0.75rem;
-      margin-top: 0.25rem;
-    }
-    .hero-content .cta-hero:hover {
+    .cta-hero:hover {
       background: #a30c23;
     }
     @media (max-width: 768px) {
-      .hero {
-        height: 45vh;
-        background-position: top;
-      }
-      .hero-content .cta-hero {
-        font-size: 1rem;
-        padding: 0.6rem 1.2rem;
-      }
+      .hero { height: 50vh; }
+      .hero-content { padding: 1.5rem; }
+      .cta-hero { font-size: 1rem; }
     }
-    .job-listings, .pricing, .cta-final, .faq {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
+    section {
+      padding: 3rem 0;
     }
     .job-listings {
-      background: #f9f9f9;
-      text-align: center;
+      background: #fff;
     }
     .job-listings h2 {
-      font-size: 2rem;
+      margin-bottom: 1.5rem;
       color: #003F87;
-      margin-bottom: 1rem;
-    }
-    .job-listings-container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .pricing {
       text-align: center;
     }
+    .job-listings-container {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .job-listings iframe {
+      border: none;
+      width: 100%;
+      min-height: 400px;
+    }
+    .job-listings .view-all {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .view-all button {
+      background: #003F87;
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .view-all button:hover {
+      background: #002a5c;
+    }
     .pricing h2 {
-      font-size: 2.25rem;
-      margin-bottom: 2rem;
-      font-weight: 700;
       color: #003F87;
+      text-align: center;
+      margin-bottom: 2rem;
     }
     .plans {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
       gap: 2rem;
     }
     .plan {
       background: #fff;
-      border-radius: 14px;
-      padding: 2.5rem 2rem;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      transition: transform 0.3s ease;
+      justify-content: space-between;
     }
-    .plan:hover {
-      transform: translateY(-4px);
-    }
-    .plan h3 {
-      margin-top: 0;
-      color: #C8102E;
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-    .plan p {
-      font-size: 1rem;
-      color: #444;
-      margin: 0.5rem 0 1rem;
-    }
-    .plan .price {
-      font-size: 1.6rem;
-      font-weight: bold;
-      margin: 1rem 0;
-      color: #111;
-    }
+    .plan h3 { color: #C8102E; margin-bottom: 0.5rem; }
+    .plan p { color: #555; margin-bottom: 1rem; }
+    .plan .price { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
     .plan button {
       background: #003F87;
-      color: white;
-      padding: 0.75rem 1.5rem;
+      color: #fff;
+      padding: 0.6rem 1.2rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       font-weight: 600;
-      font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.3s;
     }
-    .plan button:hover {
-      background: #002a5c;
-    }
-    .cta-final {
-      background: #f9f9f9;
-      text-align: center;
-    }
-    .cta-final h2 {
-      font-size: 2rem;
-      color: #003F87;
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
+    .plan button:hover { background: #002a5c; }
+    .cta-final { text-align: center; }
+    .cta-final h2 { color: #003F87; margin-bottom: 1rem; }
     .cta-final button {
       background: #C8102E;
       color: #fff;
       padding: 0.75rem 1.5rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       font-weight: 600;
-      font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.3s;
     }
-    .cta-final button:hover {
-      background: #a30c23;
-    }
-    .faq {
-      background: #f9f9f9;
-    }
-    .faq h2 {
-      text-align: center;
-      font-size: 2rem;
-      color: #003F87;
-      margin-bottom: 1rem;
-    }
-    .faq div {
-      margin-bottom: 1rem;
-    }
-    .faq strong {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
+    .cta-final button:hover { background: #a30c23; }
+    .faq h2 { color: #003F87; text-align: center; margin-bottom: 1rem; }
+    .faq div { margin-bottom: 1rem; }
+    .faq strong { display: block; font-weight: 600; margin-bottom: 0.25rem; }
     footer {
-      text-align: center;
-      padding: 2rem 1rem;
       background: #f1f1f1;
+      padding: 2rem 0;
+      text-align: center;
       font-size: 0.85rem;
     }
   </style>
 </head>
 <body>
   <section class="hero">
-    <div class="hero-content">
-      <button class="cta-hero" onclick="location.href='post-a-job.html'">Try 14-Day Free Trial<small>No credit card required</small></button>
+    <div class="hero-content container">
+      <button class="cta-hero" onclick="location.href='post-a-job.html'">
+        Try 14-Day Free Trial
+        <small>No credit card required</small>
+      </button>
     </div>
   </section>
 
-  <!-- Job Listings Section -->
-  <section class="job-listings">
+  <section class="job-listings container">
     <h2>Job Listings</h2>
     <div class="job-listings-container">
-      <!-- Replace the src below with your Airtable "Public Gallery" view iframe -->
-      <iframe class="airtable-embed" src="https://airtable.com/embed/PUBLIC_GALLERY_VIEW_ID?backgroundColor=blue" frameborder="0" onmousewheel="" width="100%" height="400"></iframe>
+      <iframe class="airtable-embed" src="https://airtable.com/embed/PUBLIC_GALLERY_VIEW_ID?backgroundColor=blue" width="100%" height="400"></iframe>
     </div>
-    <p style="margin-top:1rem;">
-      <a href="view-jobs.html"><button style="background:#003F87;color:#fff;padding:0.75rem 1.5rem;border:none;border-radius:8px;font-weight:600;">View All Jobs</button></a>
-    </p>
+    <div class="view-all">
+      <a href="view-jobs.html"><button>View All Jobs</button></a>
+    </div>
   </section>
 
-  <section class="pricing">
+  <section class="pricing container">
     <h2>Simple, Transparent Pricing</h2>
     <div class="plans">
       <div class="plan">
@@ -234,30 +200,28 @@
     </div>
   </section>
 
-  <section class="cta-final">
-    <h2>Ready to Fill Your Chair?</n    
+  <section class="cta-final container">
+    <h2>Ready to Fill Your Chair?</h2>
+    <button onclick="location.href='post-a-job.html'">Start Posting Jobs Today</button>
   </section>
 
-  <!-- FAQ Section -->
-  <section class="faq">
+  <section class="faq container">
+    <h2>Frequently Asked Questions</h2>
     <div>
-      <h2>Frequently Asked Questions</h2>
-      <div>
-        <strong>Q: Do I need a credit card for the free trial?</strong>
-        <p>A: No! You can try Choice Barber free for 14 days with no credit card required.</p>
-      </div>
-      <div>
-        <strong>Q: Can I cancel anytime?</strong>
-        <p>A: Absolutely. Monthly and annual subscriptions auto-renew, but you can cancel at any time before renewal.</p>
-      </div>
-      <div>
-        <strong>Q: How long do job posts stay active?</strong>
-        <p>A: One-time posts stay live for 30 days. Monthly and annual plan posts remain active as long as your subscription is active.</p>
-      </div>
-      <div>
-        <strong>Q: How do I contact support?</strong>
-        <p>A: Email us anytime at <a href="mailto:support@choicebarber.com">support@choicebarber.com</a>.</p>
-      </div>
+      <strong>Q: Do I need a credit card for the free trial?</strong>
+      <p>A: No! You can try Choice Barber free for 14 days with no credit card required.</p>
+    </div>
+    <div>
+      <strong>Q: Can I cancel anytime?</strong>
+      <p>A: Absolutely. Monthly and annual subscriptions auto-renew, but you can cancel at any time before renewal.</p>
+    </div>
+    <div>
+      <strong>Q: How long do job posts stay active?</strong>
+      <p>A: One-time posts stay live for 30 days. Monthly and annual plan posts remain active as long as your subscription is active.</p>
+    </div>
+    <div>
+      <strong>Q: How do I contact support?</strong>
+      <p>A: Email us anytime at <a href="mailto:support@choicebarber.com">support@choicebarber.com</a>.</p>
     </div>
   </section>
 
