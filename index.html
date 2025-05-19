@@ -6,158 +6,51 @@
   <title>Choice Barber</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f5f5f5;
-      color: #111;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-    .hero {
-      position: relative;
-      background: url('barbershop-clean-desktop.jpg') center/cover no-repeat;
-      height: 75vh;
-      min-height: 400px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero-content {
-      background: rgba(255,255,255,0.85);
-      padding: 2rem 3rem;
-      text-align: center;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-    .cta-hero {
-      background: #C8102E;
-      color: #fff;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 1.25rem;
-      cursor: pointer;
-      margin-top: 1rem;
-      transition: background 0.3s;
-    }
-    .cta-hero:hover {
-      background: #a30c23;
-    }
+    body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background: #f5f5f5; color: #111; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+    .hero { position: relative; background: url('barbershop-clean-desktop.jpg') center/cover no-repeat; height: 75vh; min-height: 400px; display: flex; align-items: center; justify-content: center; }
+    .hero-content { background: rgba(255,255,255,0.85); padding: 2rem 3rem; text-align: center; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .hero-content h1 { font-size: 2.5rem; color: #003F87; margin-bottom: 0.5rem; font-weight: 700; }
+    .hero-content p { font-size: 1.2rem; color: #444; margin-bottom: 1.5rem; }
+    .cta-hero { background: #C8102E; color: #fff; padding: 0.75rem 1.5rem; border: none; border-radius: 6px; font-weight: 600; font-size: 1.25rem; cursor: pointer; transition: background 0.3s; }
+    .cta-hero:hover { background: #a30c23; }
     @media (max-width: 768px) {
       .hero { height: 50vh; }
       .hero-content { padding: 1.5rem; }
       .cta-hero { font-size: 1rem; }
     }
-    section {
-      padding: 3rem 0;
-    }
-    .job-listings {
-      background: #fff;
-    }
-    .job-listings h2 {
-      margin-bottom: 1.5rem;
-      color: #003F87;
-      text-align: center;
-    }
-    .job-listings-container {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .job-listings iframe {
-      border: none;
-      width: 100%;
-      min-height: 400px;
-    }
-    .job-listings .view-all {
-      text-align: center;
-      margin-top: 1rem;
-    }
-    .view-all button {
-      background: #003F87;
-      color: #fff;
-      padding: 0.6rem 1.2rem;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .view-all button:hover {
-      background: #002a5c;
-    }
-    .pricing h2 {
-      color: #003F87;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .plans {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-      gap: 2rem;
-    }
-    .plan {
-      background: #fff;
-      border-radius: 10px;
-      padding: 2rem;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+    section { padding: 3rem 0; }
+    .job-listings { background: #fff; }
+    .job-listings h2 { margin-bottom: 1.5rem; color: #003F87; text-align: center; }
+    .job-listings-container { box-shadow: 0 4px 20px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
+    .job-listings iframe { border: none; width: 100%; min-height: 400px; }
+    .view-all { text-align: center; margin-top: 1rem; }
+    .view-all button { background: #003F87; color: #fff; padding: 0.6rem 1.2rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+    .view-all button:hover { background: #002a5c; }
+    .pricing h2 { color: #003F87; text-align: center; margin-bottom: 2rem; }
+    .plans { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 2rem; }
+    .plan { background: #fff; border-radius: 10px; padding: 2rem; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
     .plan h3 { color: #C8102E; margin-bottom: 0.5rem; }
     .plan p { color: #555; margin-bottom: 1rem; }
     .plan .price { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
-    .plan button {
-      background: #003F87;
-      color: #fff;
-      padding: 0.6rem 1.2rem;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+    .plan button { background: #003F87; color: #fff; padding: 0.6rem 1.2rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
     .plan button:hover { background: #002a5c; }
-    .cta-final { text-align: center; }
+    .cta-final { text-align: center; background: #f9f9f9; }
     .cta-final h2 { color: #003F87; margin-bottom: 1rem; }
-    .cta-final button {
-      background: #C8102E;
-      color: #fff;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+    .cta-final button { background: #C8102E; color: #fff; padding: 0.75rem 1.5rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
     .cta-final button:hover { background: #a30c23; }
     .faq h2 { color: #003F87; text-align: center; margin-bottom: 1rem; }
     .faq div { margin-bottom: 1rem; }
     .faq strong { display: block; font-weight: 600; margin-bottom: 0.25rem; }
-    footer {
-      background: #f1f1f1;
-      padding: 2rem 0;
-      text-align: center;
-      font-size: 0.85rem;
-    }
+    footer { background: #f1f1f1; padding: 2rem 0; text-align: center; font-size: 0.85rem; }
   </style>
 </head>
 <body>
   <section class="hero">
     <div class="hero-content container">
-      <h1 style="font-size:2rem; color:#003F87; margin-bottom:0.5rem;">Find Barbers. Fill Chairs. Fast.</h1>
-      <p style="font-size:1.1rem; color:#555; margin-bottom:1rem;">Your go-to job board for barbershops and barbers seeking top talent.</p>
-      <button class="cta-hero" onclick="location.href='post-a-job.html'">
-        Try 14-Day Free Trial<br><small>No credit card required</small>
-      </button>
+      <h1>Land Your Next Barber Job</h1>
+      <p>Connecting skilled barbers with top barbershops—fast and easy.</p>
+      <button class="cta-hero" onclick="location.href='post-a-job.html'">Try 14-Day Free Trial</button>
     </div>
   </section>
 
