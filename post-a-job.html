@@ -145,4 +145,51 @@
     </form>
   </section>
 </body>
+   <!-- SCRIPT: submit to Airtable -->
+  <script>
+    const form = document.getElementById('jobForm');
+    const messageDiv = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // 1) Gather the form values
+      const data = {
+        fields: {
+          'Title': form.title.value,
+          'Description': form.description.value,
+          'Location': form.location.value,
+          'Compensation': form.salary.value,
+          'Contact Email': form.contact.value
+        }
+      };
+
+      try {
+        // 2) Send to Airtable
+        const resp = await fetch(
+          'https://api.airtable.com/v0/appfANcZgwzZrJlQ4/shrOYf97yOoOQMpte/Post%20a%20Job',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer patzQ5R996gLY5wFc.c421378385413d1ec14a12a488d7dacea548060f92cd99b3767152b3ddd6dbb5'
+            },
+            body: JSON.stringify(data)
+          }
+        );
+
+        // 3) Handle the response
+        if (resp.ok) {
+          messageDiv.textContent = '✅ Your job has been posted!';
+          form.reset();
+        } else {
+          throw new Error('Failed to post job');
+        }
+      } catch (err) {
+        console.error(err);
+        messageDiv.textContent = '❌ There was an error. Please try again.';
+      }
+    });
+  </script>
+ 
 </html>
