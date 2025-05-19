@@ -6,9 +6,7 @@
   <title>Choice Barber</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ———————————————————— */
     /* GLOBAL STYLES */
-    /* ———————————————————— */
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
@@ -16,16 +14,13 @@
       background: #f5f5f5;
       color: #111;
     }
-
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 1rem;
     }
 
-    /* ———————————————————— */
     /* HERO SECTION */
-    /* ———————————————————— */
     .hero {
       position: relative;
       background: url('barbershop-clean-background.jpg') center/cover no-repeat;
@@ -35,7 +30,6 @@
       align-items: center;
       justify-content: center;
     }
-
     .hero-content {
       background: rgba(255,255,255,0.95);
       max-width: 600px;
@@ -46,21 +40,18 @@
       box-shadow: 0 6px 24px rgba(0,0,0,0.15);
       margin: 0 1rem;
     }
-
     .hero-content h1 {
       font-size: 2.75rem;
       line-height: 1.2;
       color: #003F87;
       margin-bottom: 1rem;
     }
-
     .hero-content p {
       font-size: 1.125rem;
       line-height: 1.5;
       color: #444;
       margin-bottom: 1.5rem;
     }
-
     .cta-hero {
       display: inline-block;
       background: #C8102E;
@@ -71,30 +62,18 @@
       font-weight: 600;
       font-size: 1.25rem;
       cursor: pointer;
-      margin-top: 0;
       transition: background 0.3s;
     }
-
     .cta-hero:hover {
       background: #a30c23;
     }
 
-    /* ———————————————————— */
     /* RESPONSIVE TWEAKS */
-    /* ———————————————————— */
     @media (max-width: 768px) {
-      .hero {
-        height: 50vh;
-      }
-      .hero-content {
-        padding: 1.5rem;
-      }
-      .hero-content h1 {
-        font-size: 2rem;
-      }
-      .hero-content p {
-        font-size: 1rem;
-      }
+      .hero { height: 50vh; }
+      .hero-content { padding: 1.5rem; }
+      .hero-content h1 { font-size: 2rem; }
+      .hero-content p { font-size: 1rem; }
       .cta-hero {
         width: 100%;
         max-width: 280px;
@@ -102,9 +81,7 @@
       }
     }
 
-    /* ———————————————————— */
     /* OTHER SECTIONS */
-    /* ———————————————————— */
     section { padding: 3rem 0; }
 
     .job-listings {
@@ -145,7 +122,7 @@
     }
     .plans {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 2rem;
     }
     .plan {
@@ -190,7 +167,11 @@
     }
     .cta-final button:hover { background: #a30c23; }
 
-    .faq h2 { color: #003F87; text-align: center; margin-bottom: 1rem; }
+    .faq h2 {
+      color: #003F87;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
     .faq div { margin-bottom: 1rem; }
     .faq strong { display: block; font-weight: 600; margin-bottom: 0.25rem; }
 
@@ -216,13 +197,66 @@
     <div class="job-listings-container">
       <iframe class="airtable-embed" src="https://airtable.com/embed/PUBLIC_GALLERY_VIEW_ID?backgroundColor=blue" width="100%" height="400"></iframe>
     </div>
-    <div class="view-all">
-      <a href="view-jobs.html"><button>View All Jobs</button></a>
-    </div>
+    <div class="view-all"><a href="view-jobs.html"><button>View All Jobs</button></a></div>
   </section>
 
   <section class="pricing container">
     <h2>Simple, Transparent Pricing</h2>
     <div class="plans">
       <div class="plan">
-        <h3>Free Trial</n
+        <h3>Free Trial</h3>
+        <p>14 days · 1 job post · No credit card required</p>
+        <div class="price">$0</div>
+        <button>Start Free Trial</button>
+      </div>
+      <div class="plan">
+        <h3>One-Time Post</h3>
+        <p>Post 1 job for 30 days</p>
+        <div class="price">$49.95</div>
+        <button>Buy Now</button>
+      </div>
+      <div class="plan">
+        <h3>Monthly Plan</h3>
+        <p>Unlimited listings · Cancel anytime</p>
+        <div class="price">$39.95/mo</div>
+        <button>Subscribe</button>
+      </div>
+      <div class="plan">
+        <h3>Annual Plan</h3>
+        <p>Unlimited listings · Save 58%</p>
+        <div class="price">$199.95/yr</div>
+        <button>Go Annual</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-final container">
+    <h2>Ready to Fill Your Chair?</h2>
+    <button onclick="location.href='post-a-job.html'">Start Posting Jobs Today</button>
+  </section>
+
+  <section class="faq container">
+    <h2>Frequently Asked Questions</h2>
+    <div>
+      <strong>Q: Do I need a credit card for the free trial?</strong>
+      <p>A: No! You can try Choice Barber free for 14 days with no credit card required.</p>
+    </div>
+    <div>
+      <strong>Q: Can I cancel anytime?</strong>
+      <p>A: Absolutely. Monthly and annual subscriptions auto-renew, but you can cancel at any time before renewal.</p>
+    </div>
+    <div>
+      <strong>Q: How long do job posts stay active?</strong>
+      <p>A: One-time posts stay live for 30 days. Monthly and annual plan posts remain active as long as your subscription is active.</p>
+    </div>
+    <div>
+      <strong>Q: How do I contact support?</strong>
+      <p>A: Email us anytime at <a href="mailto:support@choicebarber.com">support@choicebarber.com</a>.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Choice Barber. All rights reserved.
+  </footer>
+</body>
+</html>
