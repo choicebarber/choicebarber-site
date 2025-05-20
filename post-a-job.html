@@ -10,7 +10,6 @@
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
-      padding: 0;
       background: #f5f5f5;
       color: #111;
     }
@@ -48,72 +47,20 @@
       color: #444;
     }
 
-    /* FORM SECTION */
+    /* FORM EMBED SECTION */
     .form-section {
       padding: 3rem 0;
     }
-    .job-form-container {
+    .airtable-embed-container {
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      padding: 2rem;
+      overflow: hidden;
+    }
+    .airtable-embed-container iframe {
       width: 100%;
-    }
-    .job-form-container .form-group {
-      margin-bottom: 1.5rem;
-    }
-    .job-form-container label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-      color: #003F87;
-    }
-    .job-form-container input,
-    .job-form-container textarea,
-    .job-form-container select {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .job-form-container input:focus,
-    .job-form-container textarea:focus,
-    .job-form-container select:focus {
-      border-color: #003F87;
-      box-shadow: 0 0 0 3px rgba(0,63,135,0.2);
-      outline: none;
-    }
-
-    /* BUTTON */
-    .btn-primary {
-      background: #C8102E;
-      color: #fff;
-      padding: 0.75rem 2rem;
+      height: 800px;
       border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-    }
-    .btn-primary:hover {
-      background: #a30c23;
-      transform: scale(1.02);
-    }
-
-    /* MESSAGE */
-    .submission-message {
-      margin-top: 1rem;
-      font-size: 1rem;
-      text-align: center;
-      color: #003F87;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 600px) {
-      .hero-content h1 { font-size: 2rem; }
     }
   </style>
 </head>
@@ -122,80 +69,16 @@
   <section class="hero">
     <div class="hero-content container">
       <h1>Post a Barber Job</h1>
-      <p>Fill out the form below to connect with qualified barbers in your area.</p>
+      <p>Fill out the form to connect with qualified barbers in your area.</p>
     </div>
   </section>
 
-  <!-- FORM -->
+  <!-- EMBEDDED AIRTABLE FORM -->
   <section class="form-section container">
-    <form id="jobForm" class="job-form-container">
-      <div class="form-group">
-        <label for="title">Job Title</label>
-        <input id="title" name="title" type="text" placeholder="e.g. Senior Barber at Downtown Shop" required>
-      </div>
-      <div class="form-group">
-        <label for="description">Job Description</label>
-        <textarea id="description" name="description" rows="4" placeholder="Describe responsibilities and requirements" required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="location">Location</label>
-        <input id="location" name="location" type="text" placeholder="City, State" required>
-      </div>
-      <div class="form-group">
-        <label for="salary">Compensation</label>
-        <input id="salary" name="salary" type="text" placeholder="e.g. $20/hr or Commission-based" required>
-      </div>
-      <div class="form-group">
-        <label for="contact">Contact Email</label>
-        <input id="contact" name="contact" type="email" placeholder="your.email@example.com" required>
-      </div>
-      <button type="submit" class="btn-primary">Post Job</button>
-      <div id="message" class="submission-message"></div>
-    </form>
+    <div class="airtable-embed-container">
+      <!-- Replace this SRC with your Airtable form’s embed URL -->
+      <iframe class="airtable-embed" src="https://airtable.com/embed/appfANcZgwzZrJlQ4/shrOYf97yOoOQMpte?viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+    </div>
   </section>
-
-  <!-- SCRIPT: submit to Airtable -->
-  <script>
-    const form = document.getElementById('jobForm');
-    const messageDiv = document.getElementById('message');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      // Gather form values
-      const data = {
-        fields: {
-          'Title': form.title.value,
-          'Description': form.description.value,
-          'Location': form.location.value,
-          'Compensation': form.salary.value,
-          'Contact Email': form.contact.value
-        }
-      };
-
-      try {
-        const resp = await fetch(
-          'https://api.airtable.com/v0/appfANcZgwzZrJlQ4/Post%20a%20Job', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer pat'
-            },
-            body: JSON.stringify(data)
-          }
-        );
-
-        if (resp.ok) {
-          messageDiv.textContent = '✅ Your job has been posted!';
-          form.reset();
-        } else {
-          throw new Error('Failed to post job');
-        }
-      } catch (err) {
-        console.error(err);
-        messageDiv.textContent = '❌ There was an error. Please try again.';
-      }
-    });
-  </script>
 </body>
 </html>
