@@ -16,7 +16,7 @@
     .container {
       max-width: 800px;
       margin: 0 auto;
-      padding: 0 1rem;
+      padding: 1rem;
     }
 
     /* HERO SECTION */
@@ -42,26 +42,74 @@
       color: #003F87;
     }
     .hero-content p {
-      margin-top: 0.5rem;
+      margin: 0.5rem 0 0;
       font-size: 1rem;
       color: #444;
     }
 
-    /* FORM EMBED SECTION */
+    /* FORM SECTION */
     .form-section {
       padding: 3rem 0;
     }
-    .airtable-embed-container {
+    .job-form-container {
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      overflow: hidden;
-    }
-    .airtable-embed-container iframe {
+      padding: 2rem;
       width: 100%;
-      min-height: 800px;
-      border: none;
+    }
+    .job-form-container .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .job-form-container label {
       display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #003F87;
+    }
+    .job-form-container input,
+    .job-form-container textarea,
+    .job-form-container select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .job-form-container input:focus,
+    .job-form-container textarea:focus,
+    .job-form-container select:focus {
+      border-color: #003F87;
+      box-shadow: 0 0 0 3px rgba(0,63,135,0.2);
+      outline: none;
+    }
+    .btn-primary {
+      background: #C8102E;
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover {
+      background: #a30c23;
+      transform: scale(1.02);
+    }
+
+    .submission-message {
+      margin-top: 1rem;
+      font-size: 1rem;
+      text-align: center;
+      color: #003F87;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .hero-content h1 { font-size: 2rem; }
     }
   </style>
 </head>
@@ -70,16 +118,36 @@
   <section class="hero">
     <div class="hero-content container">
       <h1>Post a Barber Job</h1>
-      <p>Fill out the form to connect with qualified barbers in your area.</p>
+      <p>Fill out the form to connect with qualified barbers seamlessly.</p>
     </div>
   </section>
 
-  <!-- EMBEDDED AIRTABLE FORM -->
+  <!-- CUSTOM HTML FORM -->
   <section class="form-section container">
-    <div class="airtable-embed-container">
-      <!-- Use the Airtable form’s embed link (shr form ID) -->
-      <iframe src="https://airtable.com/embed/shrOYf97yOoOQMpte?backgroundColor=blue" loading="lazy"></iframe>
-    </div>
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="job-form-container">
+      <div class="form-group">
+        <label for="title">Job Title</label>
+        <input id="title" name="title" type="text" placeholder="e.g. Senior Barber at Downtown Shop" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Job Description</label>
+        <textarea id="description" name="description" rows="4" placeholder="Describe responsibilities and requirements" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input id="location" name="location" type="text" placeholder="City, State" required>
+      </div>
+      <div class="form-group">
+        <label for="salary">Compensation</label>
+        <input id="salary" name="salary" type="text" placeholder="e.g. $20/hr or Commission-based" required>
+      </div>
+      <div class="form-group">
+        <label for="contact">Contact Email</label>
+        <input id="contact" name="contact" type="email" placeholder="your.email@example.com" required>
+      </div>
+      <button type="submit" class="btn-primary">Post Job</button>
+      <div class="submission-message">Thank you! Your job is now live.</div>
+    </form>
   </section>
 </body>
 </html>
