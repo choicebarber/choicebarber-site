@@ -164,41 +164,37 @@
   </section>
 
   <!-- SCRIPT: submit to Cloudflare Function -->
-  <script>
-    const form = document.getElementById('jobForm');
-    const messageDiv = document.getElementById('message');
+<script>
+  const form = document.getElementById('jobForm');
+  const messageDiv = document.getElementById('message');
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-      const payload = {
-        title: form.title.value,
-        description: form.description.value,
-        employmentType: form.employmentType.value,
-        location: form.location.value,
-        salary: form.salary.value,
-        contact: form.contact.value
-      };
+    const payload = {
+      title:           form.title.value,
+      description:     form.description.value,
+      employmentType:  form.employmentType.value,
+      location:        form.location.value,
+      salary:          form.salary.value,
+      contact:         form.contact.value
+    };
 
-      try {
-        const resp = await fetch('/functions/post-job', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        const result = await resp.json();
-        if (result.success) {
-          messageDiv.textContent = '✅ Your job has been posted!';
-          form.reset();
-        } else {
-          throw new Error('Submission failed');
-        }
-      } catch (err) {
-        console.error(err);
-        messageDiv.textContent = '❌ There was an error. Please try again.';
-      }
+    const resp = await fetch('/functions/post-job', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     });
-  </script>
+
+    const result = await resp.json();
+    if (result.success) {
+      messageDiv.textContent = '✅ Your job has been posted!';
+      form.reset();
+    } else {
+      messageDiv.textContent = '❌ There was an error. Please try again.';
+    }
+  });
+</script>
+
 </body>
 </html>
