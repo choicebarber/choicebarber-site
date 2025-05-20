@@ -164,57 +164,49 @@
   </section>
 
   <!-- SCRIPT: submit to Cloudflare Function -->
-<script>
-  console.log('Job form script loaded');
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('jobForm');
-    const messageDiv = document.getElementById('message');
-    console.log('Form element:', form, 'Message div:', messageDiv);
-
-    if (!form) {
-      console.error('Form with id "jobForm" not found.');
-      return;
-    }
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      console.log('Submit event triggered');
-
-      const payload = {
-        title:           form.title.value,
-        description:     form.description.value,
-        employmentType:  form.employmentType.value,
-        location:        form.location.value,
-        salary:          form.salary.value,
-        contact:         form.contact.value
-      };
-      console.log('Payload:', payload);
-
-      try {
-        const resp = await fetch('/functions/post-job', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        console.log('Fetch response:', resp);
-
-        const result = await resp.json();
-        console.log('Result JSON:', result);
-
-        if (result.success) {
-          messageDiv.textContent = '✅ Your job has been posted!';
-          form.reset();
-        } else {
+  <script>
+    console.log('Job form script loaded');
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('jobForm');
+      const messageDiv = document.getElementById('message');
+      console.log('Form element:', form, 'Message div:', messageDiv);
+      if (!form) {
+        console.error('Form with id "jobForm" not found.');
+        return;
+      }
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        console.log('Submit event triggered');
+        const payload = {
+          title:           form.title.value,
+          description:     form.description.value,
+          employmentType:  form.employmentType.value,
+          location:        form.location.value,
+          salary:          form.salary.value,
+          contact:         form.contact.value
+        };
+        console.log('Payload:', payload);
+        try {
+          const resp = await fetch('/post-job', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          console.log('Fetch response:', resp);
+          const result = await resp.json();
+          console.log('Result JSON:', result);
+          if (result.success) {
+            messageDiv.textContent = '✅ Your job has been posted!';
+            form.reset();
+          } else {
+            messageDiv.textContent = '❌ There was an error. Please try again.';
+          }
+        } catch (err) {
+          console.error('Submission error:', err);
           messageDiv.textContent = '❌ There was an error. Please try again.';
         }
-      } catch (err) {
-        console.error('Submission error:', err);
-        messageDiv.textContent = '❌ There was an error. Please try again.';
-      }
-    });
+      });
   });
-</script>
-
-
+  </script>
 </body>
 </html>
