@@ -100,6 +100,10 @@
       transform: scale(1.02);
     }
 
+    /* MESSAGE: hide when empty */
+    .submission-message:empty {
+      display: none;
+    }
     .submission-message {
       margin-top: 1rem;
       font-size: 1rem;
@@ -134,6 +138,15 @@
         <textarea id="description" name="description" rows="4" placeholder="Describe responsibilities and requirements" required></textarea>
       </div>
       <div class="form-group">
+        <label for="employmentType">Employment Type</label>
+        <select id="employmentType" name="employmentType" required>
+          <option value="" disabled selected>Select employment type</option>
+          <option value="Full-time">Full-time</option>
+          <option value="Part-time">Part-time</option>
+          <option value="Chair/Booth Rental">Chair/Booth Rental</option>
+        </select>
+      </div>
+      <div class="form-group">
         <label for="location">Location</label>
         <input id="location" name="location" type="text" placeholder="City, State" required>
       </div>
@@ -161,6 +174,7 @@
       const payload = {
         title: form.title.value,
         description: form.description.value,
+        employmentType: form.employmentType.value,
         location: form.location.value,
         salary: form.salary.value,
         contact: form.contact.value
