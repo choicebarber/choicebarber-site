@@ -42,7 +42,7 @@
       color: #003F87;
     }
     .hero-content p {
-      margin: 0.5rem 0 0;
+      margin-top: 0.5rem;
       font-size: 1rem;
       color: #444;
     }
@@ -124,7 +124,7 @@
 
   <!-- CUSTOM HTML FORM -->
   <section class="form-section container">
-    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="job-form-container">
+    <form id="jobForm" class="job-form-container">
       <div class="form-group">
         <label for="title">Job Title</label>
         <input id="title" name="title" type="text" placeholder="e.g. Senior Barber at Downtown Shop" required>
@@ -146,8 +146,45 @@
         <input id="contact" name="contact" type="email" placeholder="your.email@example.com" required>
       </div>
       <button type="submit" class="btn-primary">Post Job</button>
-      <div class="submission-message">Thank you! Your job is now live.</div>
+      <div id="message" class="submission-message"></div>
     </form>
   </section>
+
+  <!-- SCRIPT: submit to Cloudflare Function -->
+  <script>
+    const form = document.getElementById('jobForm');
+    const messageDiv = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const payload = {
+        title: form.title.value,
+        description: form.description.value,
+        location: form.location.value,
+        salary: form.salary.value,
+        contact: form.contact.value
+      };
+
+      try {
+        const resp = await fetch('/functions/post-job', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await resp.json();
+        if (result.success) {
+          messageDiv.textContent = '✅ Your job has been posted!';
+          form.reset();
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (err) {
+        console.error(err);
+        messageDiv.textContent = '❌ There was an error. Please try again.';
+      }
+    });
+  </script>
 </body>
 </html>
