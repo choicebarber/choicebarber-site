@@ -187,7 +187,7 @@
         };
         console.log('Payload:', payload);
         try {
-          const resp = await fetch('/post-job', {
+          const resp = await fetch('/functions/post-job', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
