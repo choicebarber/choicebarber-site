@@ -127,7 +127,7 @@ document.getElementById('jobForm').addEventListener('submit', async e => {
   const msg = document.getElementById('message');
   msg.textContent = '';
 
-  // Gather checked boxes for employmentType
+  // Collect checked boxes for employmentType
   const employmentType = Array.from(
     document.querySelectorAll('input[name="employmentType"]:checked')
   ).map(cb => cb.value);
@@ -152,13 +152,13 @@ document.getElementById('jobForm').addEventListener('submit', async e => {
     });
 
     if (!resp.ok) {
-      // Show Airtable or Worker error text directly
+      // Display the raw error text and exit before parsing JSON
       const errorText = await resp.text();
       msg.textContent = errorText;
-      return;
+      return;   // <--- This return is crucial!
     }
 
-    // On success, parse JSON
+    // Only parse JSON on a successful (2xx) response:
     const result = await resp.json();
     if (result.success) {
       msg.textContent = '✅ Your job has been posted!';
@@ -172,6 +172,5 @@ document.getElementById('jobForm').addEventListener('submit', async e => {
   }
 });
 </script>
-
 </body>
 </html>
