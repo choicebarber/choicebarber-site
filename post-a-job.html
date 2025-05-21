@@ -121,47 +121,57 @@
     </form>
   </section>
 
-  <script>
-    document.getElementById('jobForm').addEventListener('submit', async e => {
-      e.preventDefault();
-      const msg = document.getElementById('message');
-      msg.textContent = '';
+<script>
+document.getElementById('jobForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const msg = document.getElementById('message');
+  msg.textContent = '';
 
-      // Collect checked boxes for employmentType
-      const employmentType = Array.from(
-        document.querySelectorAll('input[name="employmentType"]:checked')
-      ).map(cb => cb.value);
+  // Gather checked boxes for employmentType
+  const employmentType = Array.from(
+    document.querySelectorAll('input[name="employmentType"]:checked')
+  ).map(cb => cb.value);
 
-      const payload = {
-        title: e.target.title.value,
-        description: e.target.description.value,
-        employmentType,
-        compensation: e.target.compensation.value,
-        location: e.target.location.value,
-        salonName: e.target.salonName.value,
-        website: e.target.website.value,
-        socialMedia: e.target.socialMedia.value,
-        contactEmail: e.target.contactEmail.value
-      };
+  const payload = {
+    title: e.target.title.value,
+    description: e.target.description.value,
+    employmentType,
+    compensation: e.target.compensation.value,
+    location: e.target.location.value,
+    salonName: e.target.salonName.value,
+    website: e.target.website.value,
+    socialMedia: e.target.socialMedia.value,
+    contactEmail: e.target.contactEmail.value
+  };
 
-      try {
-        const resp = await fetch('/post-a-job', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const result = await resp.json();
-        if (resp.ok && result.success) {
-          msg.textContent = '✅ Your job has been posted!';
-          e.target.reset();
-        } else {
-          msg.textContent = result.error || '❌ There was an error. Please try again.';
-        }
-      } catch (err) {
-        console.error(err);
-        msg.textContent = '❌ There was an error. Please try again.';
-      }
+  try {
+    const resp = await fetch('/post-a-job', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     });
-  </script>
+
+    if (!resp.ok) {
+      // Show Airtable or Worker error text directly
+      const errorText = await resp.text();
+      msg.textContent = errorText;
+      return;
+    }
+
+    // On success, parse JSON
+    const result = await resp.json();
+    if (result.success) {
+      msg.textContent = '✅ Your job has been posted!';
+      e.target.reset();
+    } else {
+      msg.textContent = result.error || '❌ There was an error. Please try again.';
+    }
+  } catch (err) {
+    console.error(err);
+    msg.textContent = `❌ Submission failed: ${err.message}`;
+  }
+});
+</script>
+
 </body>
 </html>
