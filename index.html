@@ -65,6 +65,8 @@
       font-size: 1.25rem;
       cursor: pointer;
       transition: background 0.3s;
+      text-decoration: none;
+      display: inline-block;
     }
     .cta-hero:hover { background: #a30c23; }
 
@@ -95,8 +97,17 @@
     .job-listings-container { box-shadow: 0 4px 20px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
     .job-listings iframe { border: none; width: 100%; min-height: 400px; }
     .view-all { text-align: center; margin-top: 1rem; }
-    .view-all button { background: #003F87; color: #fff; padding: 0.6rem 1.2rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
-    .view-all button:hover { background: #002a5c; }
+    .view-all a button {
+      background: #003F87;
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .view-all a button:hover { background: #002a5c; }
 
     /* PRICING SECTION */
     .pricing h2 { color: #003F87; text-align: center; margin-bottom: 0.5rem; font-size: 2rem; }
@@ -125,7 +136,7 @@
       <h1>Connecting Skilled Barbers with Busy Shops—Fast & Simple</h1>
       <p>Barbers: Discover exclusive gigs and apply in seconds.</p>
       <p>Shop Owners: Grow your team with vetted barbers—start a 14-day free trial, no credit card required.</p>
-      <button class="cta-hero" onclick="location.href='post-a-job.html'">Try Free Trial</button>
+      <a href="/post-a-job" class="cta-hero">Try Free Trial</a>
     </div>
   </section>
 
@@ -133,9 +144,16 @@
   <section class="job-listings container">
     <h2>Job Listings</h2>
     <div class="job-listings-container">
-      <iframe class="airtable-embed" src="https://airtable.com/embed/PUBLIC_GALLERY_VIEW_ID?backgroundColor=blue" width="100%" height="400"></iframe>
+      <iframe
+        class="airtable-embed"
+        src="https://airtable.com/embed/shrOYf97yOoOQMpte?backgroundColor=blue"
+        width="100%"
+        height="400"
+      ></iframe>
     </div>
-    <div class="view-all"><button>View All Jobs</button></div>
+    <div class="view-all">
+      <a href="/jobs"><button>View All Jobs</button></a>
+    </div>
   </section>
 
   <!-- PRICING -->
