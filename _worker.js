@@ -7,29 +7,32 @@ export default {
       request.method === "POST"
     ) {
       try {
-        // 1. Parse JSON body
-        const {
-          title,
-          description,
-          employmentType,
-          compensation,
-          location,
-          salonName,
-          website,
-          contactEmail
-        } = await request.json();
+// 1. Parse JSON body
+const {
+  title,
+  description,
+  employmentType,
+  compensation,
+  location,
+  salonName,
+  website,
+  socialMedia,      // <-- grab this now
+  contactEmail
+} = await request.json();
 
-        // 2. Map to Airtable columns
-        const airtableFields = {
-          "Job Title": title,
-          "Job Description": description,
-          "Employment Type": employmentType,
-          "Compensation": compensation,
-          "Location": location,
-          "Barbershop/Salon Name": salonName,
-          "Website/Social Media": website,
-          "Contact Email": contactEmail
-        };
+// 2. Map to Airtable columns
+const airtableFields = {
+  "Job Title": title,
+  "Job Description": description,
+  "Employment Type": employmentType,
+  "Compensation": compensation,
+  "Location": location,
+  "Barbershop/Salon Name": salonName,
+  "Website (optional)": website,          // exact column name
+  "Social Media (optional)": socialMedia, // exact column name
+  "Contact Email": contactEmail
+};
+
 
         // 3. Build URL
         const table = encodeURIComponent(env.AIRTABLE_TABLE_NAME);
