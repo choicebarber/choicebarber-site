@@ -95,17 +95,23 @@
       ></textarea>
     </div>
 
-    <!-- Employment Type -->
-    <div class="form-group">
-      <label for="employmentType">Employment Type</label>
-      <select id="employmentType" name="employmentType" required>
-        <option value="" disabled selected>Select employment type</option>
-        <option value="Full-time">Full-time</option>
-        <option value="Part-time">Part-time</option>
-        <option value="Contract">Contract</option>
-        <option value="Chair/Booth Rental">Chair/Booth Rental</option>
-      </select>
-    </div>
+<!-- Employment Type (now multi-select) -->
+<div class="form-group">
+  <label for="employmentType">Employment Type</label>
+  <select
+    id="employmentType"
+    name="employmentType"
+    multiple
+    required
+    size="3"  <!-- shows three rows by default -->
+  >
+    <option value="Full-time">Full-time</option>
+    <option value="Part-time">Part-time</option>
+    <option value="Chair/Booth Rental">Chair/Booth Rental</option>
+  </select>
+  <small>Select one or more options</small>
+</div>
+
 
     <!-- Compensation -->
     <div class="form-group">
