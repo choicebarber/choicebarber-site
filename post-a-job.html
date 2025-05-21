@@ -22,8 +22,9 @@
     .job-form-container { background:#fff; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.05); padding:2rem; }
     .form-group { margin-bottom:1.5rem; }
     label { display:block; margin-bottom:0.5rem; font-weight:600; color:#003F87; }
-    input, textarea, select { width:100%; padding:0.75rem 1rem; font-size:1rem; border:1px solid #ccc; border-radius:6px; transition:border-color 0.2s, box-shadow 0.2s; }
-    input:focus, textarea:focus, select:focus { border-color:#003F87; box-shadow:0 0 0 3px rgba(0,63,135,0.2); outline:none; }
+    input, textarea { width:100%; padding:0.75rem 1rem; font-size:1rem; border:1px solid #ccc; border-radius:6px; transition:border-color 0.2s, box-shadow 0.2s; }
+    textarea { resize: vertical; }
+    input:focus, textarea:focus { border-color:#003F87; box-shadow:0 0 0 3px rgba(0,63,135,0.2); outline:none; }
 
     /* Employment Type checkboxes styling */
     .employment-options { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin-top: 0.5rem; }
@@ -42,6 +43,7 @@
   </style>
 </head>
 <body>
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-content container">
       <h1>Post a Barber Job</h1>
@@ -49,20 +51,24 @@
     </div>
   </section>
 
+  <!-- FORM -->
   <section class="form-section container">
     <form id="jobForm" class="job-form-container" onsubmit="return false;">
       <h2>Post a Barber Job</h2>
 
+      <!-- Job Title -->
       <div class="form-group">
         <label for="title">Job Title</label>
         <input id="title" name="title" type="text" placeholder="e.g. Senior Barber at Downtown Shop" required />
       </div>
 
+      <!-- Job Description -->
       <div class="form-group">
         <label for="description">Job Description</label>
         <textarea id="description" name="description" rows="4" placeholder="Describe responsibilities and requirements" required></textarea>
       </div>
 
+      <!-- Employment Type as checkboxes -->
       <div class="form-group">
         <label>Employment Type</label>
         <div class="employment-options">
@@ -73,31 +79,43 @@
         <small>Select one or more options</small>
       </div>
 
+      <!-- Compensation -->
       <div class="form-group">
         <label for="compensation">Compensation</label>
         <input id="compensation" name="compensation" type="text" placeholder="$20/hr or Commission-based" required />
       </div>
 
+      <!-- Location -->
       <div class="form-group">
         <label for="location">Location</label>
         <input id="location" name="location" type="text" placeholder="City, State" required />
       </div>
 
+      <!-- Barbershop/Salon Name -->
       <div class="form-group">
         <label for="salonName">Barbershop/Salon Name</label>
         <input id="salonName" name="salonName" type="text" placeholder="e.g. Downtown Cuts LLC" required />
       </div>
 
+      <!-- Website (optional) -->
       <div class="form-group">
-        <label for="website">Website/Social Media (optional)</label>
-        <input id="website" name="website" type="url" placeholder="https://example.com or @instagram_handle" />
+        <label for="website">Website (optional)</label>
+        <input id="website" name="website" type="url" placeholder="https://example.com" />
       </div>
 
+      <!-- Social Media (optional) -->
+      <div class="form-group">
+        <label for="socialMedia">Social Media (optional)</label>
+        <input id="socialMedia" name="socialMedia" type="text" placeholder="@instagram_handle or Facebook page" />
+      </div>
+
+      <!-- Contact Email -->
       <div class="form-group">
         <label for="contactEmail">Contact Email</label>
         <input id="contactEmail" name="contactEmail" type="email" placeholder="your.email@example.com" required />
       </div>
 
+      <!-- Submit & Message -->
       <button type="submit" class="btn-primary">Post Job</button>
       <div id="message" class="submission-message"></div>
     </form>
@@ -109,6 +127,7 @@
       const msg = document.getElementById('message');
       msg.textContent = '';
 
+      // Collect checked boxes for employmentType
       const employmentType = Array.from(
         document.querySelectorAll('input[name="employmentType"]:checked')
       ).map(cb => cb.value);
@@ -121,6 +140,7 @@
         location: e.target.location.value,
         salonName: e.target.salonName.value,
         website: e.target.website.value,
+        socialMedia: e.target.socialMedia.value,
         contactEmail: e.target.contactEmail.value
       };
 
