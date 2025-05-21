@@ -2,15 +2,15 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Handle form POSTs to /post-a-job
-    if (url.pathname === "/post-a-job" && request.method === "POST") {
-      const form = await request.formData();
-      const fields = {};
-      for (const [key, value] of form.entries()) {
-        fields[key] = value;
-      }
+    if (
+      (url.pathname === "/post-a-job" || url.pathname === "/post-a-job/") &&
+      request.method === "POST"
+    ) {
+      // 1. Parse the JSON body:
+      const fields = await request.json();
 
-      const airtableUrl = 
+      // 2. Send to Airtable:
+      const airtableUrl =
         `https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${env.AIRTABLE_TABLE_NAME}`;
       const airtableRes = await fetch(airtableUrl, {
         method: "POST",
@@ -18,6 +18,7 @@ export default {
           Authorization: `Bearer ${env.AIRTABLE_API_KEY}`,
           "Content-Type": "application/json",
         },
+        // Airtable expects { fields: { <colName>: value, … } }
         body: JSON.stringify({ fields }),
       });
 
@@ -25,10 +26,14 @@ export default {
         return new Response("❌ Couldn’t save your job.", { status: 500 });
       }
 
-      return Response.redirect(`${url.origin}/jobs`, 303);
+      // 3. Return JSON so your page can confirm success
+      return new Response(
+        JSON.stringify({ success: true }),
+        { headers: { "Content-Type": "application/json" } }
+      );
     }
 
-    // All other requests just serve your static files
+    // All other requests fall back to static files
     return env.ASSETS.fetch(request);
   },
 };
