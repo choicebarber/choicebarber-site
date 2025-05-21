@@ -1,46 +1,48 @@
- export default {
-   async fetch(request, env) {
-     const url = new URL(request.url);
+// 1. Read the JSON body:
+const {
+  title,
+  description,
+  employmentType,
+  location,
+  salary,
+  contact
+} = await request.json();
 
-     if (
-       (url.pathname === "/post-a-job" || url.pathname === "/post-a-job/") &&
-       request.method === "POST"
-     ) {
-       // 1. Parse the JSON body:
-       const fields = await request.json();
+// 2. Build the Airtable “fields” object with exact column names:
+const airtableFields = {
+  "Job Title": title,
+  "Job Description": description,
+  "Employment Type": employmentType,
+  "Location": location,
+  "Compensation": salary,
+  "Contact Email": contact
+};
 
--      const airtableUrl =
--        `https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${env.AIRTABLE_TABLE_NAME}`;
-+      // URL-encode the table name in case there are spaces
-+      const table = encodeURIComponent(env.AIRTABLE_TABLE_NAME);
-+      const airtableUrl =
-+        `https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${table}`;
+// 3. URL-encode the table name (just in case):
+const table = encodeURIComponent(env.AIRTABLE_TABLE_NAME);
+const airtableUrl = `https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${table}`;
 
-       const airtableRes = await fetch(airtableUrl, {
-         method: "POST",
-         headers: {
--          Authorization: `Bearer ${env.AIRTABLE_API_KEY}`,
-+          Authorization: `Bearer ${env.AIRTABLE_API_KEY}`,
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify({ fields }),
-       });
+// 4. Send it off to Airtable:
+const airtableRes = await fetch(airtableUrl, {
+  method: "POST",
+  headers: {
+    Authorization: `Bearer ${env.AIRTABLE_API_KEY}`,
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({ fields: airtableFields }),
+});
 
-       if (!airtableRes.ok) {
-         const errorText = await airtableRes.text();
-         return new Response(
--          "❌ Couldn’t save your job.",
-+          `❌ Airtable error ${airtableRes.status}: ${errorText}`,
-           { status: 500 }
-         );
-       }
+// 5. Surface any Airtable error text:
+if (!airtableRes.ok) {
+  const errorText = await airtableRes.text();
+  return new Response(
+    `❌ Airtable error ${airtableRes.status}: ${errorText}`,
+    { status: 500 }
+  );
+}
 
-       return new Response(
-         JSON.stringify({ success: true }),
-         { headers: { "Content-Type": "application/json" } }
-       );
-     }
-
-     return env.ASSETS.fetch(request);
-   },
- };
+// 6. On success, return JSON so your page script can show the confirmation:
+return new Response(
+  JSON.stringify({ success: true }),
+  { headers: { "Content-Type": "application/json" } }
+);
