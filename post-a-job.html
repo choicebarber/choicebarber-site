@@ -67,82 +67,145 @@
   </section>
 
   <!-- FORM -->
-  <section class="form-section container">
-    <form id="jobForm" class="job-form-container">
-      <div class="form-group">
-        <label for="title">Job Title</label>
-        <input id="title" name="title" type="text" placeholder="e.g. Senior Barber at Downtown Shop" required>
-      </div>
-      <div class="form-group">
-        <label for="description">Job Description</label>
-        <textarea id="description" name="description" rows="4" placeholder="Describe responsibilities and requirements" required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="employmentType">Employment Type</label>
-        <select id="employmentType" name="employmentType" required>
-          <option value="" disabled selected>Select employment type</option>
-          <option value="Full-time">Full-time</option>
-          <option value="Part-time">Part-time</option>
-          <option value="Chair/Booth Rental">Chair/Booth Rental</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="location">Location</label>
-        <input id="location" name="location" type="text" placeholder="City, State" required>
-      </div>
-      <div class="form-group">
-        <label for="salary">Compensation</label>
-        <input id="salary" name="salary" type="text" placeholder="e.g. $20/hr or Commission-based" required>
-      </div>
-      <div class="form-group">
-        <label for="contact">Contact Email</label>
-        <input id="contact" name="contact" type="email" placeholder="your.email@example.com" required>
-      </div>
-      <button type="submit" class="btn-primary">Post Job</button>
-      <div id="message" class="submission-message"></div>
-    </form>
-  </section>
+<section class="form-section container">
+  <form id="jobForm" class="job-form-container" onsubmit="return false;">
+    <h2>Post a Barber Job</h2>
 
-  <!-- SCRIPT -->
-  <script>
-    document.addEventListener('DOMContentLoaded', ()=> {
-      const form = document.getElementById('jobForm');
-      const messageDiv = document.getElementById('message');
+    <!-- Job Title -->
+    <div class="form-group">
+      <label for="title">Job Title</label>
+      <input
+        id="title"
+        name="title"
+        type="text"
+        placeholder="e.g. Senior Barber at Downtown Shop"
+        required
+      />
+    </div>
 
-      form.addEventListener('submit', async e => {
-        e.preventDefault();
-        messageDiv.textContent = '';
+    <!-- Job Description -->
+    <div class="form-group">
+      <label for="description">Job Description</label>
+      <textarea
+        id="description"
+        name="description"
+        rows="4"
+        placeholder="Describe responsibilities and requirements"
+        required
+      ></textarea>
+    </div>
 
-        const payload = {
-          title: form.title.value,
-          description: form.description.value,
-          employmentType: form.employmentType.value,
-          location: form.location.value,
-          salary: form.salary.value,
-          contact: form.contact.value
-        };
+    <!-- Employment Type -->
+    <div class="form-group">
+      <label for="employmentType">Employment Type</label>
+      <select id="employmentType" name="employmentType" required>
+        <option value="" disabled selected>Select employment type</option>
+        <option value="Full-time">Full-time</option>
+        <option value="Part-time">Part-time</option>
+        <option value="Contract">Contract</option>
+        <option value="Chair/Booth Rental">Chair/Booth Rental</option>
+      </select>
+    </div>
 
-        try {
-          const resp = await fetch('/post-a-job', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          const result = await resp.json();
+    <!-- Compensation -->
+    <div class="form-group">
+      <label for="compensation">Compensation</label>
+      <input
+        id="compensation"
+        name="compensation"
+        type="text"
+        placeholder="$20/hr or Commission-based"
+        required
+      />
+    </div>
 
-          if (resp.ok && result.success) {
-            messageDiv.textContent = '✅ Your job has been posted!';
-            form.reset();
-          } else {
-            console.error(result.error);
-            messageDiv.textContent = '❌ There was an error. Please try again.';
-          }
-        } catch (err) {
-          console.error(err);
-          messageDiv.textContent = '❌ There was an error. Please try again.';
-        }
-      });
+    <!-- Location -->
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input
+        id="location"
+        name="location"
+        type="text"
+        placeholder="City, State"
+        required
+      />
+    </div>
+
+    <!-- Barbershop/Salon Name -->
+    <div class="form-group">
+      <label for="salonName">Barbershop/Salon Name</label>
+      <input
+        id="salonName"
+        name="salonName"
+        type="text"
+        placeholder="e.g. Downtown Cuts LLC"
+        required
+      />
+    </div>
+
+    <!-- Website/Social Media (optional) -->
+    <div class="form-group">
+      <label for="website">Website/Social Media (optional)</label>
+      <input
+        id="website"
+        name="website"
+        type="url"
+        placeholder="https://example.com or @instagram_handle"
+      />
+    </div>
+
+    <!-- Contact Email -->
+    <div class="form-group">
+      <label for="contactEmail">Contact Email</label>
+      <input
+        id="contactEmail"
+        name="contactEmail"
+        type="email"
+        placeholder="your.email@example.com"
+        required
+      />
+    </div>
+
+    <!-- Submit & Message -->
+    <button type="submit" class="btn-primary">Post Job</button>
+    <div id="message" class="submission-message"></div>
+  </form>
+</section>
+
+<script>
+document.getElementById('jobForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const msg = document.getElementById('message');
+  msg.textContent = '';
+
+  const payload = {
+    title: e.target.title.value,
+    description: e.target.description.value,
+    employmentType: e.target.employmentType.value,
+    compensation: e.target.compensation.value,
+    location: e.target.location.value,
+    salonName: e.target.salonName.value,
+    website: e.target.website.value,
+    contactEmail: e.target.contactEmail.value
+  };
+
+  try {
+    const resp = await fetch('/post-a-job', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     });
-  </script>
-</body>
-</html>
+    const result = await resp.json();
+    if (resp.ok && result.success) {
+      msg.textContent = '✅ Your job has been posted!';
+      e.target.reset();
+    } else {
+      msg.textContent = result.error || '❌ There was an error. Please try again.';
+    }
+  } catch (err) {
+    console.error(err);
+    msg.textContent = '❌ There was an error. Please try again.';
+  }
+});
+</script>
+
