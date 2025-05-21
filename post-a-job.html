@@ -6,53 +6,54 @@
   <title>Post a Job – Choice Barber</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* GLOBAL STYLES */
-    body { font-family: 'Inter', sans-serif; margin: 0; background: #f5f5f5; color: #111; }
-    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
-
+    /* GLOBAL */
+    body { font-family: 'Inter', sans-serif; margin:0; padding:0; background:#f5f5f5; color:#111; }
+    .container { max-width:800px; margin:0 auto; padding:1rem; }
     /* HERO */
     .hero {
-      background: url('barbershop-clean-background.jpg') center/cover no-repeat;
-      height: 40vh; display: flex; align-items: center; justify-content: center; text-align: center;
+      background:url('barbershop-clean-background.jpg') center/cover no-repeat;
+      height:40vh; display:flex; align-items:center; justify-content:center; text-align:center;
     }
     .hero-content {
-      background: rgba(255,255,255,0.9); padding: 2rem; border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 90%; max-width: 600px;
+      background:rgba(255,255,255,0.9); padding:2rem; border-radius:10px;
+      box-shadow:0 4px 20px rgba(0,0,0,0.1); width:90%; max-width:600px;
     }
-    .hero-content h1 { margin: 0; font-size: 2.5rem; color: #003F87; }
-    .hero-content p  { margin: 0.5rem 0 0; font-size: 1rem; color: #444; }
+    .hero-content h1 { margin:0; font-size:2.5rem; color:#003F87; }
+    .hero-content p  { margin-top:0.5rem; font-size:1rem; color:#444; }
 
     /* FORM */
-    .form-section { padding: 3rem 0; }
+    .form-section { padding:3rem 0; }
     .job-form-container {
-      background: #fff; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      padding: 2rem;
+      background:#fff; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.05);
+      padding:2rem;
     }
-    .form-group { margin-bottom: 1.5rem; }
+    .form-group { margin-bottom:1.5rem; }
     label {
-      display: block; margin-bottom: 0.5rem; font-weight: 600; color: #003F87;
+      display:block; margin-bottom:0.5rem; font-weight:600; color:#003F87;
     }
     input, textarea, select {
-      width: 100%; padding: 0.75rem 1rem; border: 1px solid #ccc; border-radius: 6px;
-      font-size: 1rem; transition: border-color 0.2s, box-shadow 0.2s;
+      width:100%; padding:0.75rem 1rem; font-size:1rem; border:1px solid #ccc;
+      border-radius:6px; transition:border-color 0.2s, box-shadow 0.2s;
     }
     input:focus, textarea:focus, select:focus {
-      border-color: #003F87; box-shadow: 0 0 0 3px rgba(0,63,135,0.2); outline: none;
+      border-color:#003F87; box-shadow:0 0 0 3px rgba(0,63,135,0.2); outline:none;
     }
 
     /* BUTTON */
     .btn-primary {
-      background: #C8102E; color: #fff; padding: 0.75rem 2rem; border: none;
-      border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.3s, transform 0.2s;
+      background:#C8102E; color:#fff; padding:0.75rem 2rem; border:none;
+      border-radius:6px; font-weight:600; cursor:pointer; transition:background 0.3s, transform 0.2s;
     }
-    .btn-primary:hover { background: #a30c23; transform: scale(1.02); }
+    .btn-primary:hover { background:#a30c23; transform:scale(1.02); }
 
     /* MESSAGE */
-    .submission-message { margin-top: 1rem; text-align: center; color: #003F87; }
-    .submission-message:empty { display: none; }
+    .submission-message {
+      margin-top:1rem; text-align:center; color:#003F87;
+    }
+    .submission-message:empty { display:none; }
 
-    @media (max-width: 600px) {
-      .hero-content h1 { font-size: 2rem; }
+    @media (max-width:600px) {
+      .hero-content h1 { font-size:2rem; }
     }
   </style>
 </head>
@@ -61,7 +62,7 @@
   <section class="hero">
     <div class="hero-content container">
       <h1>Post a Barber Job</h1>
-      <p>Fill out the form below to connect with qualified barbers in your area.</p>
+      <p>Connect with top barbers in your area—fast and easy.</p>
     </div>
   </section>
 
@@ -72,12 +73,10 @@
         <label for="title">Job Title</label>
         <input id="title" name="title" type="text" placeholder="e.g. Senior Barber at Downtown Shop" required>
       </div>
-
       <div class="form-group">
         <label for="description">Job Description</label>
         <textarea id="description" name="description" rows="4" placeholder="Describe responsibilities and requirements" required></textarea>
       </div>
-
       <div class="form-group">
         <label for="employmentType">Employment Type</label>
         <select id="employmentType" name="employmentType" required>
@@ -87,22 +86,18 @@
           <option value="Chair/Booth Rental">Chair/Booth Rental</option>
         </select>
       </div>
-
       <div class="form-group">
         <label for="location">Location</label>
         <input id="location" name="location" type="text" placeholder="City, State" required>
       </div>
-
       <div class="form-group">
         <label for="salary">Compensation</label>
         <input id="salary" name="salary" type="text" placeholder="e.g. $20/hr or Commission-based" required>
       </div>
-
       <div class="form-group">
         <label for="contact">Contact Email</label>
         <input id="contact" name="contact" type="email" placeholder="your.email@example.com" required>
       </div>
-
       <button type="submit" class="btn-primary">Post Job</button>
       <div id="message" class="submission-message"></div>
     </form>
@@ -110,42 +105,44 @@
 
   <!-- SCRIPT -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('jobForm')
-      const messageDiv = document.getElementById('message')
+    document.addEventListener('DOMContentLoaded', ()=> {
+      const form = document.getElementById('jobForm');
+      const messageDiv = document.getElementById('message');
 
       form.addEventListener('submit', async e => {
-        e.preventDefault()
+        e.preventDefault();
+        messageDiv.textContent = '';
 
         const payload = {
-          title:           form.title.value,
-          description:     form.description.value,
-          employmentType:  form.employmentType.value,
-          location:        form.location.value,
-          salary:          form.salary.value,
-          contact:         form.contact.value
-        }
+          title: form.title.value,
+          description: form.description.value,
+          employmentType: form.employmentType.value,
+          location: form.location.value,
+          salary: form.salary.value,
+          contact: form.contact.value
+        };
 
         try {
           const resp = await fetch('/post-job', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
-          })
-          const result = await resp.json()
+          });
+          const result = await resp.json();
 
           if (resp.ok && result.success) {
-            messageDiv.textContent = '✅ Your job has been posted!'
-            form.reset()
+            messageDiv.textContent = '✅ Your job has been posted!';
+            form.reset();
           } else {
-            messageDiv.textContent = '❌ There was an error. Please try again.'
+            console.error(result.error);
+            messageDiv.textContent = '❌ There was an error. Please try again.';
           }
         } catch (err) {
-          console.error(err)
-          messageDiv.textContent = '❌ There was an error. Please try again.'
+          console.error(err);
+          messageDiv.textContent = '❌ There was an error. Please try again.';
         }
-      })
-    })
+      });
+    });
   </script>
 </body>
 </html>
