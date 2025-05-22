@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- 1. If the path is "/coming-soon", redirect to "/coming-soon.html" -->
+  <script>
+    if (window.location.pathname === "/coming-soon") {
+      window.location.replace("/coming-soon.html");
+    }
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Coming Soon – Choice Barber</title>
