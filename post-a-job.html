@@ -122,59 +122,59 @@
   </section>
 
   <script>
-    document.getElementById('jobForm').addEventListener('submit', async e => {
-      e.preventDefault();
-      const msg = document.getElementById('message');
-      msg.textContent = '';
+document.getElementById('jobForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const msg = document.getElementById('message');
+  msg.textContent = '';
 
-      // 1. Ensure at least one Employment Type is selected
-      const checked = document.querySelectorAll('input[name="employmentType"]:checked');
-      if (checked.length === 0) {
-        msg.textContent = '❌ Please select at least one Employment Type.';
-        return;
-      }
+  // 1️⃣ Require at least one checkbox
+  const checked = document.querySelectorAll('input[name="employmentType"]:checked');
+  if (checked.length === 0) {
+    msg.textContent = '❌ Please select at least one Employment Type.';
+    return;
+  }
 
-      // 2. Gather checked Employment Type options
-      const employmentType = Array.from(checked).map(cb => cb.value);
+  // 2️⃣ Gather checked Employment Type options into an array
+  const employmentType = Array.from(checked).map(cb => cb.value);
 
-      // 3. Build the payload
-      const payload = {
-        title: e.target.title.value,
-        description: e.target.description.value,
-        employmentType,
-        compensation: e.target.compensation.value,
-        location: e.target.location.value,
-        salonName: e.target.salonName.value,
-        website: e.target.website.value,
-        socialMedia: e.target.socialMedia.value,
-        contactEmail: e.target.contactEmail.value
-      };
+  // 3️⃣ Build the payload with your other fields
+  const payload = {
+    title: e.target.title.value,
+    description: e.target.description.value,
+    employmentType,
+    compensation: e.target.compensation.value,
+    location: e.target.location.value,
+    salonName: e.target.salonName.value,
+    website: e.target.website.value,
+    socialMedia: e.target.socialMedia.value,
+    contactEmail: e.target.contactEmail.value
+  };
 
-      try {
-        const resp = await fetch('/post-a-job', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        if (!resp.ok) {
-          const errorText = await resp.text();
-          msg.textContent = errorText;
-          return;
-        }
-
-        const result = await resp.json();
-        if (result.success) {
-          msg.textContent = '✅ Your job has been posted!';
-          e.target.reset();
-        } else {
-          msg.textContent = result.error || '❌ There was an error. Please try again.';
-        }
-      } catch (err) {
-        console.error(err);
-        msg.textContent = `❌ Submission failed: ${err.message}`;
-      }
+  try {
+    const resp = await fetch('/post-a-job', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     });
+
+    if (!resp.ok) {
+      const errorText = await resp.text();
+      msg.textContent = errorText;
+      return;
+    }
+
+    const result = await resp.json();
+    if (result.success) {
+      msg.textContent = '✅ Your job has been posted!';
+      e.target.reset();
+    } else {
+      msg.textContent = result.error || '❌ There was an error. Please try again.';
+    }
+  } catch (err) {
+    console.error(err);
+    msg.textContent = `❌ Submission failed: ${err.message}`;
+  }
+});
   </script>
 </body>
 </html>
