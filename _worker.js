@@ -29,7 +29,7 @@ export default {
           "Compensation": compensation,
           "Location": location,
           "Barbershop/Salon Name": salonName,
-          "Website(optional)": website,
+          "Website (optional)": website,
           "Social Media (optional)": socialMedia,
           "Contact Email": contactEmail
         };
