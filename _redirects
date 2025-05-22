@@ -1,3 +1,11 @@
-/index.html        /index.html         200
-/coming-soon       /coming-soon.html   200
-/                  /coming-soon.html   200
+# 1) Explicitly serve your real homepage when you visit index.html
+/index.html          /index.html         200
+
+# 2) Explicitly serve the raw coming-soon.html file (no loop)
+/coming-soon.html    /coming-soon.html   200
+
+# 3) Map the pretty URL /coming-soon to the file once, without looping
+/coming-soon         /coming-soon.html   200
+
+# 4) Everything else at the root goes to coming-soon
+/                    /coming-soon.html   200
