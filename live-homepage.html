@@ -125,13 +125,11 @@
   </section>
 
   <!-- JOB LISTINGS -->
-  <section class="job-listings container">
-    <h2>Job Listings</h2>
-    <div class="job-listings-container">
-      <iframe class="airtable-embed" src="https://airtable.com/embed/shrOYf97yOoOQMpte?backgroundColor=blue" width="100%" height="400"></iframe>
-    </div>
-    <div class="view-all"><a href="/jobs"><button>View All Jobs</button></a></div>
-  </section>
+<section class="job-listings container">
+  <h2>Newest Jobs</h2>
+  <ul id="recent-list" class="job-listings-container"></ul>
+  <div class="view-all"><a href="/search.html"><button>Search Jobs</button></a></div>
+</section>
 
   <!-- PRICING -->
   <section class="pricing container">
@@ -156,5 +154,29 @@
 
   <!-- FOOTER -->
   <footer>&copy; 2025 Choice Barber. All rights reserved.</footer>
+<script>
+  async function loadRecentJobs() {
+    const ul = document.getElementById("recent-list");
+    ul.innerHTML = "<li>Loading…</li>";
+    try {
+      const resp = await fetch("/api/jobs?&maxRecords=5");
+      const jobs = await resp.json();
+      if (!jobs.length) {
+        ul.innerHTML = "<li>No jobs found.</li>";
+        return;
+      }
+      ul.innerHTML = jobs.map(r => `
+        <li style="padding:1rem;border-bottom:1px solid #eee;">
+          <strong>${r.fields["Job Title"]}</strong><br/>
+          ${r.fields.Location} — ${r.fields["Employment Type"]}<br/>
+          <a href="/view-job.html?id=${r.id}">View details →</a>
+        </li>
+      `).join("");
+    } catch (e) {
+      ul.innerHTML = "<li>Error loading jobs.</li>";
+    }
+  }
+  document.addEventListener("DOMContentLoaded", loadRecentJobs);
+</script>
 </body>
 </html>
