@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 1. JS redirect when visiting exactly "/" -->
+  <!-- 1) Only redirect when at EXACTLY "/" -->
   <script>
     if (window.location.pathname === "/") {
       window.location.replace("/coming-soon.html");
     }
   </script>
 
-  <!-- 2. Meta-refresh fallback (only on "/") -->
-  <meta http-equiv="refresh" content="0;url=/coming-soon.html" />
-
-  <!-- 3. Core metadata -->
+  <!-- 2) Core metadata and styles below -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Choice Barber</title>
-
-  <!-- 4. Fonts & Styles… -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* …your CSS here… */
-  </style>
+  <!-- your fonts & CSS… -->
 </head>
 
     /* GLOBAL STYLES */
