@@ -6,81 +6,90 @@
   <title>Search Job Listings – Choice Barber</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; background: #fff; color: #003F87; padding: 2rem; }
-    h1 { color: #C8102E; text-align: center; }
-    form { max-width: 400px; margin: 1rem auto; }
-    input { width: 100%; padding: 0.5rem; font-size: 1rem; }
-    button { width: 100%; padding: 0.5rem; margin-top: 0.5rem; font-size: 1rem; cursor: pointer; }
-    #results { max-width: 600px; margin: 2rem auto; }
-    #results ul { list-style: none; padding: 0; }
-    #results li { padding: 1rem; border-bottom: 1px solid #eee; }
-    #results li strong { display: block; font-size: 1.1rem; }
-    #results .error { color: #C8102E; text-align: center; }
+    body { font-family: 'Inter', sans-serif; max-width:700px; margin:2rem auto; padding:0 1rem; color:#003F87; }
+    h1 { color:#C8102E; text-align:center; }
+    .section { margin-top:2rem; }
+    form { display:flex; gap:0.5rem; }
+    input { flex:1; padding:0.5rem; border:1px solid #ccc; border-radius:4px; }
+    button { padding:0.5rem 1rem; background:#C8102E; color:#fff; border:none; border-radius:4px; cursor:pointer; }
+    button:hover { background:#a30c23; }
+    ul { list-style:none; padding:0; }
+    li { background:#fff; padding:1rem; margin-bottom:0.5rem; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1); }
+    li strong { display:block; font-size:1.1rem; }
+    .error { color:#C8102E; text-align:center; }
+    .no-results { color:#777; text-align:center; }
   </style>
 </head>
 <body>
-  <h1>Search Job Listings</h1>
-  <form id="searchForm">
-    <label for="loc">Location (city, state):</label>
-    <input id="loc" name="location" placeholder="e.g. New York, NY" />
+  <h1>Search Barber Jobs</h1>
+
+  <form id="search-form">
+    <input
+      type="text"
+      id="loc"
+      name="location"
+      placeholder="Enter city or state (e.g. Miami, FL)"
+      required
+    />
     <button type="submit">Search</button>
   </form>
 
-  <div id="results">
-    <p id="message">Enter a location and click “Search.”</p>
-    <ul id="list"></ul>
-  </div>
+  <!-- Filtered results -->
+  <section class="section" id="filtered-section" style="display:none">
+    <h2>Results for <span id="current-location"></span></h2>
+    <ul id="filtered-list"></ul>
+  </section>
+
+  <!-- Most recent widget -->
+  <section class="section">
+    <h2>Most Recent Jobs</h2>
+    <ul id="recent-list"></ul>
+  </section>
 
   <script>
-    const form = document.getElementById('searchForm');
-    const input = document.getElementById('loc');
-    const msg = document.getElementById('message');
-    const list = document.getElementById('list');
-
-    // Populate form from query and auto-run if present
-    const params = new URLSearchParams(location.search);
-    const initialLoc = params.get('location') || '';
-    if (initialLoc) {
-      input.value = initialLoc;
-      doSearch(initialLoc);
-    }
-
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const loc = input.value.trim();
-      if (!loc) return;
-      // update URL without reload
-      history.replaceState(null, '', `?location=${encodeURIComponent(loc)}`);
-      doSearch(loc);
-    });
-
-    async function doSearch(loc) {
-      msg.textContent = 'Loading…';
-      list.innerHTML = '';
+    async function fetchJobs(params, listEl, emptyMessage) {
+      listEl.innerHTML = '<li>Loading…</li>';
       try {
-        const res = await fetch(`/api/jobs?location=${encodeURIComponent(loc)}`);
-        if (!res.ok) throw new Error(`Status ${res.status}`);
-        const records = await res.json();
-        if (!records.length) {
-          msg.textContent = 'No jobs found.';
+        const query = new URLSearchParams(params).toString();
+        const res = await fetch('/api/jobs?' + query);
+        if (!res.ok) throw new Error(await res.text());
+        const jobs = await res.json();
+        if (!jobs.length) {
+          listEl.innerHTML = `<li class="no-results">${emptyMessage}</li>`;
           return;
         }
-        msg.textContent = '';
-        list.innerHTML = records.map(r => {
+        listEl.innerHTML = jobs.map(r => {
           const f = r.fields;
+          const types = Array.isArray(f['Employment Type'])
+            ? f['Employment Type'].join(', ')
+            : f['Employment Type'];
           return `
             <li>
               <strong>${f['Job Title']}</strong>
-              ${f.Location} — ${Array.isArray(f['Employment Type']) ? f['Employment Type'].join(', ') : f['Employment Type']}
-              <br><a href="/view-job.html?id=${r.id}">View details →</a>
+              ${f.Location} — ${types}
+              <br/><a href="/view-job.html?id=${r.id}">View details →</a>
             </li>`;
         }).join('');
       } catch (err) {
-        msg.textContent = 'Error loading jobs.';
-        msg.classList.add('error');
         console.error(err);
+        listEl.innerHTML = '<li class="error">Error loading jobs.</li>';
       }
     }
+
+    // 1) Load most recent on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchJobs({ maxRecords: 5 }, document.getElementById('recent-list'), 'No recent jobs.');
+    });
+
+    // 2) Handle search form
+    document.getElementById('search-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const loc = document.getElementById('loc').value.trim();
+      if (!loc) return;
+      document.getElementById('current-location').textContent = loc;
+      document.getElementById('filtered-section').style.display = 'block';
+      fetchJobs({ location: loc, maxRecords: 20 }, document.getElementById('filtered-list'), 'No jobs found for that location.');
+    });
   </script>
 </body>
 </html>
