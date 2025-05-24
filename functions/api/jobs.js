@@ -2,43 +2,29 @@ export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
   const params = url.searchParams;
 
-  // 1) Pagination / sorting
+  // how many records? default 5
   const maxRecords = params.get("maxRecords") || "5";
-  const sortByCreatedDesc = "&sort[0][field]=Created&sort[0][direction]=desc";
 
-  // 2) Optional location filter
-  let filter = "";
+  // optional location filter
+  let filterFormula = "";
   if (params.has("location")) {
-    // Airtable needs quotes around the string in filterByFormula
-    const loc = params.get("location")
-      .replace(/"/g, '\\"')      // escape internal quotes
-      .trim();
-    filter = `&filterByFormula=FIND("${loc}",{Location})`;
+    const loc = params.get("location").replace(/"/g, '\\"');
+    filterFormula = `&filterByFormula=FIND(LOWER("${loc}"),LOWER({Location}))`;
   }
 
-  // 3) Build Airtable URL
-  const tableName = encodeURIComponent(env.AIRTABLE_TABLE_NAME);
-  const airtableUrl = `https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${tableName}` +
-                      `?maxRecords=${maxRecords}` +
-                      sortByCreatedDesc +
-                      filter;
+  const table = encodeURIComponent(env.AIRTABLE_TABLE_NAME);
+  const airtableUrl = `https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${table}` +
+                       `?maxRecords=${maxRecords}` +
+                       `&sort[0][field]=Created&sort[0][direction]=desc` +
+                       filterFormula;
 
-  // 4) Fetch from Airtable
-  const airtableRes = await fetch(airtableUrl, {
-    headers: {
-      Authorization: `Bearer ${env.AIRTABLE_API_KEY}`
-    }
+  const res = await fetch(airtableUrl, {
+    headers: { Authorization: `Bearer ${env.AIRTABLE_API_KEY}` }
   });
-  if (!airtableRes.ok) {
-    return new Response(
-      `❌ Airtable error ${airtableRes.status}: ${await airtableRes.text()}`,
-      { status: 500 }
-    );
+  if (!res.ok) {
+    return new Response(`Error fetching jobs: ${res.status}`, { status: 502 });
   }
-
-  const { records } = await airtableRes.json();
-
-  // 5) Return JSON array of records
+  const { records } = await res.json();
   return new Response(JSON.stringify(records), {
     headers: { "Content-Type": "application/json" }
   });
