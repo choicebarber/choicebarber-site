@@ -1,34 +1,45 @@
-export async function onRequestGet({ env, request }) {
-  const url = new URL(request.url)
-  const locQuery = url.searchParams.get('location')?.trim() || ''
+export async function onRequestGet({ request, env }) {
+  const url = new URL(request.url);
+  const params = url.searchParams;
 
-  // Construct Airtable URL
-  const table = encodeURIComponent(env.AIRTABLE_TABLE_NAME)
-  let airtableUrl = `https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${table}`
+  // 1) Pagination / sorting
+  const maxRecords = params.get("maxRecords") || "5";
+  const sortByCreatedDesc = "&sort[0][field]=Created&sort[0][direction]=desc";
 
-  // If a location filter was provided, add a filterByFormula that
-  // does a case-insensitive substring match on the {Location} field.
-  if (locQuery) {
-    const escaped = locQuery.replace(/"/g, '\\"')
-    const formula = `SEARCH(LOWER("${escaped}"), LOWER({Location}))`
-    airtableUrl += `?filterByFormula=${encodeURIComponent(formula)}`
+  // 2) Optional location filter
+  let filter = "";
+  if (params.has("location")) {
+    // Airtable needs quotes around the string in filterByFormula
+    const loc = params.get("location")
+      .replace(/"/g, '\\"')      // escape internal quotes
+      .trim();
+    filter = `&filterByFormula=FIND("${loc}",{Location})`;
   }
 
-  // Fetch from Airtable
-  const resp = await fetch(airtableUrl, {
+  // 3) Build Airtable URL
+  const tableName = encodeURIComponent(env.AIRTABLE_TABLE_NAME);
+  const airtableUrl = `https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${tableName}` +
+                      `?maxRecords=${maxRecords}` +
+                      sortByCreatedDesc +
+                      filter;
+
+  // 4) Fetch from Airtable
+  const airtableRes = await fetch(airtableUrl, {
     headers: {
       Authorization: `Bearer ${env.AIRTABLE_API_KEY}`
     }
-  })
-
-  if (!resp.ok) {
-    const txt = await resp.text()
-    return new Response(`Airtable error ${resp.status}: ${txt}`, { status: 500 })
+  });
+  if (!airtableRes.ok) {
+    return new Response(
+      `❌ Airtable error ${airtableRes.status}: ${await airtableRes.text()}`,
+      { status: 500 }
+    );
   }
 
-  const { records } = await resp.json()
-  // Return just the bare array of records
+  const { records } = await airtableRes.json();
+
+  // 5) Return JSON array of records
   return new Response(JSON.stringify(records), {
-    headers: { 'Content-Type': 'application/json' }
-  })
+    headers: { "Content-Type": "application/json" }
+  });
 }
