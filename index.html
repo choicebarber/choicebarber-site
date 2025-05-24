@@ -3,14 +3,10 @@
 <head>
   <!-- 1) Redirect ONLY on the production domain -->
   <script>
-    // If we’re on choicebarber.com (or www.choicebarber.com), redirect / → coming-soon
-    const isProd =
-      location.hostname === "choicebarber.com" ||
-      location.hostname === "www.choicebarber.com";
-    if (
-      isProd &&
-      (location.pathname === "/" || location.pathname === "/index.html")
-    ) {
+    // Only on choicebarber.com (or www.choicebarber.com), send root → coming-soon.html
+    const host = location.hostname;
+    const isProd = host === "choicebarber.com" || host === "www.choicebarber.com";
+    if (isProd && (location.pathname === "/" || location.pathname === "/index.html")) {
       location.replace("/coming-soon.html");
     }
   </script>
@@ -21,7 +17,10 @@
   <title>Choice Barber</title>
 
   <!-- 3) Fonts & styles -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
   <style>
     /* GLOBAL STYLES */
     body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background: #f5f5f5; color: #111; }
@@ -31,38 +30,24 @@
     .hero {
       position: relative;
       background: url('barbershop-clean-background.jpg') center/cover no-repeat;
-      height: 75vh;
-      min-height: 400px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      height: 75vh; min-height: 400px;
+      display: flex; align-items: center; justify-content: center;
     }
     .hero-content {
       background: rgba(255,255,255,0.7);
-      max-width: 580px;
-      width: 100%;
+      max-width: 580px; width: 100%;
       padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      text-align: center;
-      border-radius: 10px;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+      text-align: center; border-radius: 10px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.2);
     }
     .hero-content h1 { font-size: 2.75rem; line-height: 1.2; color: #003F87; margin: 0; }
     .hero-content p { font-size: 1.125rem; line-height: 1.5; color: #444; margin: 0; }
     .cta-hero {
-      background: #C8102E;
-      color: #fff;
-      padding: 0.75rem 2rem;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 1.25rem;
-      cursor: pointer;
-      transition: background 0.3s;
-      text-decoration: none;
+      background: #C8102E; color: #fff;
+      padding: 0.75rem 2rem; border: none; border-radius: 6px;
+      font-weight: 600; font-size: 1.25rem; cursor: pointer;
+      transition: background 0.3s; text-decoration: none;
       display: inline-block;
     }
     .cta-hero:hover { background: #a30c23; }
@@ -76,26 +61,29 @@
     .job-listings-container { box-shadow: 0 4px 20px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
     .view-all { text-align: center; margin-top: 1rem; }
     .view-all a button {
-      background: #003F87;
-      color: #fff;
-      padding: 0.6rem 1.2rem;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s;
+      background: #003F87; color: #fff;
+      padding: 0.6rem 1.2rem; border: none; border-radius: 6px;
+      font-weight: 600; cursor: pointer; transition: background 0.3s;
     }
     .view-all a button:hover { background: #002a5c; }
 
     /* PRICING SECTION */
     .pricing h2 { color: #003F87; text-align: center; margin-bottom: 0.5rem; font-size: 2rem; }
     .pricing-subtitle { text-align: center; color: #555; margin-bottom: 2rem; font-size: 1.125rem; }
-    .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
-    .plan { background: #fff; border-radius: 10px; padding: 2rem; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
+    .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 2rem; }
+    .plan {
+      background: #fff; border-radius: 10px; padding: 2rem;
+      text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
     .plan h3 { color: #C8102E; margin-bottom: 0.5rem; }
     .plan p { color: #555; margin-bottom: 1rem; }
     .plan .price { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
-    .plan button { background: #003F87; color: #fff; padding: 0.6rem 1.2rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+    .plan button {
+      background: #003F87; color: #fff;
+      padding: 0.6rem 1.2rem; border: none; border-radius: 6px;
+      font-weight: 600; cursor: pointer; transition: background 0.3s;
+    }
     .plan button:hover { background: #002a5c; }
 
     /* FAQ SECTION */
@@ -122,7 +110,9 @@
   <section class="job-listings container">
     <h2>Newest Jobs</h2>
     <ul id="recent-list" class="job-listings-container"></ul>
-    <div class="view-all"><a href="/search.html"><button>Search Jobs</button></a></div>
+    <div class="view-all">
+      <a href="/search.html"><button>Search Jobs</button></a>
+    </div>
   </section>
 
   <!-- PRICING -->
@@ -130,24 +120,57 @@
     <h2>Flexible Pricing for Fast-Growing Shops</h2>
     <p class="pricing-subtitle">Pick a plan that fits your team and budget, with zero hidden fees.</p>
     <div class="plans">
-      <div class="plan"><h3>Free Trial</h3><p>14 days · 1 job post · No credit card required</p><div class="price">$0</div><button>Start Free Trial</button></div>
-      <div class="plan"><h3>One-Time Post</h3><p>Post 1 job for 30 days</p><div class="price">$49.95</div><button>Buy Now</button></div>
-      <div class="plan"><h3>Monthly Plan</h3><p>Unlimited listings · Cancel anytime</p><div class="price">$39.95/mo</div><button>Subscribe</button></div>
-      <div class="plan"><h3>Annual Plan</h3><p>Unlimited listings · Save 58%</p><div class="price">$199.95/yr</div><button>Go Annual</button></div>
+      <div class="plan">
+        <h3>Free Trial</h3>
+        <p>14 days · 1 job post · No credit card required</p>
+        <div class="price">$0</div>
+        <button>Start Free Trial</button>
+      </div>
+      <div class="plan">
+        <h3>One-Time Post</h3>
+        <p>Post 1 job for 30 days</p>
+        <div class="price">$49.95</div>
+        <button>Buy Now</button>
+      </div>
+      <div class="plan">
+        <h3>Monthly Plan</h3>
+        <p>Unlimited listings · Cancel anytime</p>
+        <div class="price">$39.95/mo</div>
+        <button>Subscribe</button>
+      </div>
+      <div class="plan">
+        <h3>Annual Plan</h3>
+        <p>Unlimited listings · Save 58%</p>
+        <div class="price">$199.95/yr</div>
+        <button>Go Annual</button>
+      </div>
     </div>
   </section>
 
   <!-- FAQ -->
   <section class="faq container">
     <h2>Frequently Asked Questions</h2>
-    <div><strong>Q: Do I need a credit card for the free trial?</strong><p>No—you can try Choice Barber free for 14 days with no credit card required.</p></div>
-    <div><strong>Q: Can I cancel anytime?</strong><p>Yes—monthly and annual subscriptions auto-renew, but you can cancel at any time before renewal.</p></div>
-    <div><strong>Q: How long do job posts stay active?</strong><p>One-time posts stay live for 30 days. Subscribed posts remain active while your plan is active.</p></div>
-    <div><strong>Q: How do I contact support?</strong><p>Email us anytime at <a href="mailto:support@choicebarber.com">support@choicebarber.com</a>.</p></div>
+    <div>
+      <strong>Q: Do I need a credit card for the free trial?</strong>
+      <p>No—you can try Choice Barber free for 14 days with no credit card required.</p>
+    </div>
+    <div>
+      <strong>Q: Can I cancel anytime?</strong>
+      <p>Yes—monthly and annual subscriptions auto-renew, but you can cancel at any time before renewal.</p>
+    </div>
+    <div>
+      <strong>Q: How long do job posts stay active?</strong>
+      <p>One-time posts stay live for 30 days. Subscribed posts remain active while your plan is active.</p>
+    </div>
+    <div>
+      <strong>Q: How do I contact support?</strong>
+      <p>Email us anytime at <a href="mailto:support@choicebarber.com">support@choicebarber.com</a>.</p>
+    </div>
   </section>
 
   <!-- FOOTER -->
   <footer>&copy; 2025 Choice Barber. All rights reserved.</footer>
+
   <script>
     async function loadRecentJobs() {
       const ul = document.getElementById("recent-list");
