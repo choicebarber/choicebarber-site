@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 1) Only on the real domain do we redirect -->
+  <!-- 1) Redirect ONLY on the production domain -->
   <script>
+    // If we’re on choicebarber.com (or www.choicebarber.com), redirect / → coming-soon
+    const isProd =
+      location.hostname === "choicebarber.com" ||
+      location.hostname === "www.choicebarber.com";
     if (
-      location.hostname === "choicebarber.com" &&
+      isProd &&
       (location.pathname === "/" || location.pathname === "/index.html")
     ) {
       location.replace("/coming-soon.html");
