@@ -1,6 +1,6 @@
 export async function onRequestPost({ request, env }) {
   try {
-    // 1. Parse the JSON body from the form
+    // 1. Parse the JSON body
     const {
       title,
       description,
@@ -13,7 +13,7 @@ export async function onRequestPost({ request, env }) {
       contactEmail
     } = await request.json();
 
-    // 2. Map to Airtable column names
+    // 2. Map to your Airtable field names
     const airtableFields = {
       "Job Title": title,
       "Job Description": description,
@@ -26,13 +26,13 @@ export async function onRequestPost({ request, env }) {
       "Contact Email": contactEmail
     };
 
-    // 3. Build the Airtable API URL
-    const base = env.AIRTABLE_BASE_ID;
-    const table = encodeURIComponent(env.AIRTABLE_TABLE_NAME);
-    const url = `https://api.airtable.com/v0/${base}/${table}`;
+    // 3. Build Airtable URL
+    const baseId = env.AIRTABLE_BASE_ID;
+    const tableName = encodeURIComponent(env.AIRTABLE_TABLE_NAME);
+    const airtableUrl = `https://api.airtable.com/v0/${baseId}/${tableName}`;
 
-    // 4. Send POST request to Airtable
-    const airtableRes = await fetch(url, {
+    // 4. POST to Airtable
+    const airtableRes = await fetch(airtableUrl, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${env.AIRTABLE_API_KEY}`,
@@ -41,18 +41,19 @@ export async function onRequestPost({ request, env }) {
       body: JSON.stringify({ fields: airtableFields })
     });
 
-    // 5. Handle Airtable errors
+    const airtableData = await airtableRes.json();
     if (!airtableRes.ok) {
-      const errorText = await airtableRes.text();
-      return new Response(`❌ Airtable error ${airtableRes.status}: ${errorText}`, { status: 500 });
+      throw new Error(
+        `Airtable error ${airtableRes.status}: ${JSON.stringify(airtableData)}`
+      );
     }
 
-    // 6. On success, return JSON
+    // 5. Return success
     return new Response(JSON.stringify({ success: true }), {
+      status: 200,
       headers: { "Content-Type": "application/json" }
     });
-
   } catch (err) {
-    return new Response(`❌ Worker exception: ${err.message}`, { status: 500 });
+    return new Response(err.message, { status: 500 });
   }
 }
