@@ -1,5 +1,6 @@
 export async function onRequestPost({ request, env }) {
-  try {
+  // …your existing Airtable POST logic…
+}
     // 1. Parse the JSON body
     const {
       title,
