@@ -1,31 +1,34 @@
-// functions/api/jobs.js
+export async function onRequestGet({ env, request }) {
+  const url = new URL(request.url)
+  const locQuery = url.searchParams.get('location')?.trim() || ''
 
-export async function onRequestGet(context) {
-  const { request, env } = context
-  const { AIRTABLE_API_KEY, AIRTABLE_BASE_ID, AIRTABLE_TABLE_NAME } = env
+  // Construct Airtable URL
+  const table = encodeURIComponent(env.AIRTABLE_TABLE_NAME)
+  let airtableUrl = `https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${table}`
 
-  // pull maxRecords (or default to 5) and sort by created time desc
-  const url = new URL(`https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_API_KEY)}`)
-  url.searchParams.set('maxRecords', request.url.searchParams.get('maxRecords') || '5')
-  url.searchParams.set('sort[0][field]', 'Created')
-  url.searchParams.set('sort[0][direction]', 'desc')
+  // If a location filter was provided, add a filterByFormula that
+  // does a case-insensitive substring match on the {Location} field.
+  if (locQuery) {
+    const escaped = locQuery.replace(/"/g, '\\"')
+    const formula = `SEARCH(LOWER("${escaped}"), LOWER({Location}))`
+    airtableUrl += `?filterByFormula=${encodeURIComponent(formula)}`
+  }
 
-  const airtableRes = await fetch(url.toString(), {
+  // Fetch from Airtable
+  const resp = await fetch(airtableUrl, {
     headers: {
-      Authorization: `Bearer ${AIRTABLE_API_KEY}`,
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${env.AIRTABLE_API_KEY}`
     }
   })
 
-  if (!airtableRes.ok) {
-    const text = await airtableRes.text()
-    return new Response(`❌ Airtable error ${airtableRes.status}: ${text}`, { status: 500 })
+  if (!resp.ok) {
+    const txt = await resp.text()
+    return new Response(`Airtable error ${resp.status}: ${txt}`, { status: 500 })
   }
 
-  const { records } = await airtableRes.json()
-  // only return the array of records
+  const { records } = await resp.json()
+  // Return just the bare array of records
   return new Response(JSON.stringify(records), {
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' }
   })
 }
-
