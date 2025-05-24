@@ -1,6 +1,5 @@
 export async function onRequestPost({ request, env }) {
-  // …your existing Airtable POST logic…
-}
+  try {
     // 1. Parse the JSON body
     const {
       title,
@@ -54,6 +53,7 @@ export async function onRequestPost({ request, env }) {
       status: 200,
       headers: { "Content-Type": "application/json" }
     });
+
   } catch (err) {
     return new Response(err.message, { status: 500 });
   }
