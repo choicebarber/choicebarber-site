@@ -151,7 +151,7 @@ document.getElementById('jobForm').addEventListener('submit', async e => {
   };
 
   try {
-    const resp = await fetch('/post-a-job', {
+    const resp = await fetch('/api/post-a-job', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
